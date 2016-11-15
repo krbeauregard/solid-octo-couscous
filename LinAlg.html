@@ -4,7 +4,6 @@
 <!-- Begin Header -->
 <head>
   <title class="highlight">Linear Algebra in a Browser</title>
-  <rel="stylesheet" type="text/css" href="css/main.css"/>
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -16,47 +15,58 @@
 
 <!-- Begin Body -->
 <body>
-  <h1 style="padding:40px" class='text-center '>Matrix Multiplication </h1>
+  <h1 style="padding:40px" class='text-center '>Matrix Multiplication</h1>
+
   <form style='float:left; position: relative; margin:8px' class='form-inline'>
+
     <div style='color:blue' class='form-group'>
       <label for='rowsA'>Rows:</label>
       <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsA'>
     </div>
+
     <div style='color:green' class='form-group'>
       <label for='colsA'>Columns:</label>
       <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsA'>
     </div>
     <button type='button' class='btn btn-default' onclick='create_matrix(0)'>Generate Matrix A</button>
-    <div style='width:25px' class='form-group'></div>
-    <div style='color:green' class='form-group'>
-      <label for='rowsB'>Rows:</label>
-      <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsB'>
-    </div>
-    <div style='color:red' class='form-group'>
-      <label for='colsB'>Columns:</label>
-      <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsB'>
-    </div>
-    <button type='button' class='btn btn-default' onclick="create_matrix(1)">Generate Matrix B</button>
 
-    <div style="display:table; width:400px; margin:0 auto;">
-      <div style="display: table-row;">
-        <div style="display:table-cell; padding:25px">
-            <table>
-            <tbody id='matA'></tbody>
-          </table>
-        </div>
+    <div style='width:25px' class='form-group'></div>
+
+      <div style='color:green' class='form-group'>
+        <label for='rowsB'>Rows:</label>
+        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsB'>
+      </div>
+
+      <div style='color:red' class='form-group'>
+        <label for='colsB'>Columns:</label>
+        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsB'>
+      </div>
+      <button type='button' class='btn btn-default' onclick="create_matrix(1)">Generate Matrix B</button>
+
+      <div style="display:table; width:400px; margin:0 auto;">
+        <div style="display: table-row;">
+
+          <div style="display:table-cell; padding:25px">
+              <table>
+              <tbody id='matA'></tbody>
+            </table>
+          </div>
+
           <div style='display:table-cell; padding:25px'>
             <table>
               <tbody id='matB'></tbody>
             </table>
           </div>
-      </div>
+
+        </div>
     </div>
+
     <div>
       <button type='button' class="btn btn-default" onclick="multiply_matrix(matA, matB)">Multiply</button>
       <button type='button' class="btn btn-default" onclick="step(matA, matB, matC)">Next Step</button>
       <button type='submit' class='btn btn-default'>Reset Page  </button>
     </div>
+
       <div style="display:table; width:1000px; margin:0 auto;">
         <div style="display: table-col;">
           <div style="display:table-cell; padding:25px">
@@ -64,6 +74,7 @@
               <tbody id='matC'></tbody>
             </table>
           </div>
+
           <div style="display:table-cell; padding:25px">
             <p id='cellA'></p>
             <p id='cellB'></p>
@@ -72,12 +83,15 @@
         </div>
       </div>
     <div>
+
       <table>
         <tbody>
           <tr><td id='istep'><td id='jstep'><td id='kstep'>
         </tbody>
       </table>
+
     </div>
+
     <div>
       <p>for i in range(len(matrixARows)):</p>
       <p style="margin-left: 25px">for j in range(len(matrixBCols)):</p>
