@@ -16,73 +16,99 @@
 
 <!-- Begin Body -->
 <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand">Visualize Linear Algebra</a>
+        <ul class="nav navbar-nav nav-pills" role="tablist">
+          <li><a href="layout_test.html">Home</a></li>
+          <li class="active"><a href="LinAlg.html">Multiplication</a></li>
+          <li><a href="rref.html">RREF</a></li>
+          <li><a href="#">Inversion</a></li>
+          <li><a href="#">Determinant</a></li>
+          <li><a href="#">Eigen-@#$Y</a></li>
+        </ul> <!-- end main menu -->
+      </div> <!-- end navbar container -->
+    </nav>
+
   <div class="container">
-    <h2>Title goes here</h2>
-
-    <ul class="nav nav-pills" role="tablist">
-      <li><a href="layout_test.html">Home</a></li>
-      <li  class="active"><a href="LinAlg.html">Multiplication</a></li>
-      <li><a href="rref.html">RREF</a></li>
-      <li><a href="#">Inversion</a></li>
-      <li><a href="#">Determinant</a></li>
-      <li><a href="#">Eigen-@#$Y</a></li>
-    </ul> <!-- end main menu -->
-
-    <h1 style="padding:40px" class='text-center '>Matrix Multiplication</h1>
-
-    <form style='float:left; position: relative; margin:8px' class='form-horizontal'>
-
     <div class="row">
-    <div class="col-md-4">
+        <div class="col-md-3">
 
-      <h3>Matrix A</h3>
-      <div style='color:blue' class='form-group'>
-        <label class="control-label" for='rowsA'>Rows:</label>
-        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsA'>
-      </div> <!-- end of row input -->
+<!--_____________________________Matrix A__________________________________-->
+          <table class="table table-sm">
+            <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
+            <tbody id='matA' class="matrix">&nbsp;</tbody>
+          </table>
 
-      <div style='color:green' class='form-group'>
-        <label for='colsA'>Columns:</label>
-        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsA'>
-      </div> <!-- end column input -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input class="cols-md-1 form-control"
+                     id="rowsA"
+                     type="text"
+                     aria-label="input for rowsA">
+            </span>
 
-      <h3>Matrix B</h3>
-      <div style='color:green' class='form-group'>
-        <label for='rowsB'>Rows:</label>
-        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsB'>
-      </div> <!-- end row input -->
+            <span class="input-group-addon">
+              <input class="col-xs-1 form-control" 
+                     id="colsA"
+                     type="text"
+                     aria-label="input for colsA">
+            </span>
+          </div><!-- end the input group -->
+        </div> <!--end col-md-4 -->
 
-      <div style='color:red' class='form-group'>
-        <label for='colsB'>Columns:</label>
-        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsB'>
-      </div> <!-- end column input -->
+<!--_____________________________Matrix B__________________________________-->
+				<div class="col-md-3">
+					<table class="table table-sm">
+						<thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
+						<tbody id='matB' class="matrix">&nbsp;</tbody>
+					</table>
 
-      <div style="padding:25px">
-        <button type='button' class='btn btn-default' onclick="create_matrix()">Generate Matrices</button>
-      </div> <!-- end generate button -->
-    </div> <!-- end column -->
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input class="col-xs-1 form-control"
+										 id="rowsB"
+										 type="text"
+										 aria-label="input for rowsB"
+										 placeholder="rows">
+						</span>
 
-    <div class="col-md-4">
-      <table>
-        <tbody id='matA'></tbody>
-      </table>
-    </div> <!--end col-md-4 -->
+						<span class="input-group-addon">
+							<input class="col-xs-1 form-control" 
+										 id="colsB"
+										 type="text"
+										 aria-label="input for colsB"
+										 placeholder="cols">
+						</span>
 
-    <div class="col-md-4">
-      <table>
-        <tbody id='matB'></tbody>
-      </table>
-    </div> <!--end col-md-4 -->
 
-    <div style="text-align:center">
-      <button type='button' class="btn btn-default" onclick="multiply_matrix(matA, matB)">Multiply</button>
-      <button type='button' class="btn btn-default" onclick="step(matA, matB, matC)">Next Step</button>
-      <button type='submit' class='btn btn-default'>Reset Page  </button>
-    </div> <!-- end button group -->
+					</div><!-- end the input group -->
+				</div> <!-- end col-md-4 -->
 
-    <table>
-      <tbody id='matC'></tbody>
-    </table>
+<!--_____________________________Matrix C__________________________________-->
+				<div style="margin-top:20px" class="col-md-3">
+					<table class="table table-sm">
+						<thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
+						<tbody id='matC' class="matrix"></tbody>
+					</table>
+				</div><!-- end column for matrix C -->
+
+				<div class="input-group">
+					<span class="input-group-addon">
+						<button type='button' class="btn btn-secondary" onclick="multiply_matrix(matA, matB)">Multiply</button>
+					</span>
+					<span class="input-group-addon">
+						<button type='button' class="btn btn-secondary" onclick="step(matA, matB, matC)">Next Step</button>
+					</span>
+					<span class="input-group-addon">
+						<button type='submit' class="btn btn-secondary">Reset Page</button>
+					</span>
+					<span class="input-group-addon">
+						<button class="btn" onclick="create_matrix()" type="button" aria-label="input for m">Generate</button>
+					</span>
+				</div> <!-- end dimension input row-->
+
 
       <div style="display:table-cell; padding:25px;">
         <p id='cellA'></p>
@@ -95,9 +121,10 @@
           <tr><td id='istep'><td id='jstep'><td id='kstep'>
         </tbody>
       </table>
-    </div>
-    <div>
 
+    </div>
+
+		$$\sqrt{2}$$
     <pre>
       <code class="language-python">
             <p>for i in range(len(matrixA)):<br>
@@ -107,17 +134,16 @@
             &emsp;&emsp;&emsp;total += matrixA[i][k]*matrixB[k][j]<br>
             &emsp;matrixC[i][j] = s</p>
         </code>
-    </pre>
-</div>
+    </pre><!-- end code -->
 
-</form>
   </div>
-
-  </form>
 </div> <!-- end of container -->
 </body>
 
 <!-- Begin Javascript -->
 <script src='linear_math.js'></script>
 <script src="themes/prism.js"></script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 <!-- End Javascript -->

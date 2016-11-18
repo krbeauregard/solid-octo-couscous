@@ -1,15 +1,43 @@
+body {
+    padding: 70px 0 0 0;
+}
+
 .highlight_y {
-    background-color:yellow;
+    background-color:#e9c904;
 }
 
 .highlight_g {
-    background-color:green;
+    background-color:#8fc33a;
 }
 
 .highlight_b {
-    background-color:blue;
+    background-color:#62edd6;
 }
 
 .highlight_none{
     background-color: white;
+}
+
+.matrix {
+    position: relative;
+	overflow:scroll;
+}
+
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid #000;
+    width: 6px;
+    height: 100%;
+}
+
+.matrix:before {
+    left: -6px;
+    border-right: 0;
+}
+
+.matrix:after {
+    right: -6px;
+    border-left: 0;
 }

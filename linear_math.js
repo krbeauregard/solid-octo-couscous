@@ -15,11 +15,16 @@ function create_matrix()  { //(id) removed. Will generate both at once
     colsB = document.getElementById('colsB').value;
 
     for (var i = 0; i<rowsA; i++){
+		
       mtxA += '<tr>';
       for (var j = 0; j<colsA; j++){
         num = Math.floor(Math.random()*9);
-        mtxA += "<td class='text-center'>["+num+"]</td>";
-      }
+		var coord = "";
+		coord += "A" + i + j;
+		// Add the matrix coordinates as an ID
+        mtxA += "<td class='col-md-1 text-center' id='";
+		mtxA += coord + "'>" + num + "</td>";
+	  }
       mtxA += '</tr>';
     }
     document.getElementById('matA').innerHTML = mtxA;
@@ -29,7 +34,11 @@ function create_matrix()  { //(id) removed. Will generate both at once
       mtxB += '<tr>';
       for (var j = 0; j<colsB; j++){
         num = Math.floor(Math.random()*9);
-        mtxB += "<td class='text-center'>["+num+"]</td>";
+
+		// Add the matrix coordinates as an ID
+		var coord = "B"+i+""+j;
+        mtxB += "<td class='col-md-1 text-center' id='";
+		mtxB += coord + "'>" + num + "</td>";
       }
       mtxB += '</tr>';
     }
@@ -51,11 +60,11 @@ function multiply_matrix(a, b){
       for (var j = 0; j < j_max; j++){
         sum = 0;
         for (var k = 0; k < k_max; k++){
-          cellA = document.getElementById('matA').rows[i].cells[k].innerHTML.substring(1,2);
-          cellB = document.getElementById('matB').rows[k].cells[j].innerHTML.substring(1,2);
+          cellA = document.getElementById('matA').rows[i].cells[k].innerHTML;
+          cellB = document.getElementById('matB').rows[k].cells[j].innerHTML;
           sum += parseInt(cellA)*parseInt(cellB);
         }
-        mytable += "<td class='text-center'>["+sum+"]</td>";
+        mytable += "<td class='col-md-1 text-center'>"+sum+"</td>";
       }
       mytable += '</td>';
     }
@@ -123,20 +132,21 @@ function step(a, b, c){
       document.getElementById('matC').rows[i_step].cells[j_step].className = 'highlight_b';
       k_last > k ? k_last = k-1 : k_last = k_step;
       k_step++;
-      cellAIK = document.getElementById('matA').rows[i_step].cells[(k_step)-1].innerHTML.substring(1,2);
-      cellBKJ = document.getElementById('matB').rows[(k_step)-1].cells[j_step].innerHTML.substring(1,2);
+      cellAIK = document.getElementById('matA').rows[i_step].cells[(k_step)-1].innerHTML;
+      cellBKJ = document.getElementById('matB').rows[(k_step)-1].cells[j_step].innerHTML;
       if (k_step >1 && k_step < col+1){
         axb += '+'
       }
       axb += '('+cellAIK+'*'+cellBKJ+')'
       sum += parseInt(cellAIK)*parseInt(cellBKJ);
-      aik += 'A('+(i_step+1)+','+k_step+')='+cellAIK;
+	  aik += "$$\\sqrt{2}$$";
+      //aik += 'A('+(i_step+1)+','+k_step+')='+cellAIK;
       bkj += 'B('+k_step+','+(j_step+1)+')='+cellBKJ;
       cij += 'C('+(i_step+1)+','+(j_step+1)+')='+axb+'='+sum;
+		MathJax.Hub.Typeset();
       document.getElementById('cellA').innerHTML = aik;
       document.getElementById('cellB').innerHTML = bkj;
       document.getElementById('cellC').innerHTML = cij;
-
     }
     i_last = i_step;
 }
