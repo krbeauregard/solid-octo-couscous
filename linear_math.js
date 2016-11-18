@@ -141,15 +141,15 @@ function step(a, b, c){
         j_step = j_step%col;
       }
       if (i_step >= 0){
-        document.getElementById('matA').rows[i_last].cells[k_last].className = 'highlight_none';
+        document.getElementById('matA').rows[i_last].cells[k_last].className = 'highlight_none col-md-1 text-center';
       }
       document.getElementById('kstep').innerHTML = 'k: '+(k_step+1) ;
       if (j_step >= 0){
         j_last > col ? j_last = col : j_last = j_step;
-        document.getElementById('matB').rows[k_last].cells[j_last].className = 'highlight_none';
+        document.getElementById('matB').rows[k_last].cells[j_last].className = 'highlight_none col-md-1 text-center';
       }
       if (k_step >=0){
-        document.getElementById('matC').rows[i_last].cells[j_last].className = 'highlight_none';
+        document.getElementById('matC').rows[i_last].cells[j_last].className = 'highlight_none col-md-1 text-center';
       }
       if (k_step%k == 0){
         j_step = (j_step%col);
@@ -165,9 +165,9 @@ function step(a, b, c){
         i_step++;
         document.getElementById('istep').innerHTML = 'i: '+(i_step+1);
       }
-      document.getElementById('matA').rows[i_step].cells[k_step].className = 'highlight_y';
-      document.getElementById('matB').rows[k_step].cells[j_step].className = 'highlight_g';
-      document.getElementById('matC').rows[i_step].cells[j_step].className = 'highlight_b';
+      document.getElementById('matA').rows[i_step].cells[k_step].className = 'highlight_y col-md-1 text-center';
+      document.getElementById('matB').rows[k_step].cells[j_step].className = 'highlight_g col-md-1 text-center';
+      document.getElementById('matC').rows[i_step].cells[j_step].className = 'highlight_b col-md-1 text-center';
       k_last > k ? k_last = k-1 : k_last = k_step;
       k_step++;
       cellAIK = document.getElementById('matA').rows[i_step].cells[(k_step)-1].innerHTML;
