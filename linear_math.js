@@ -1,9 +1,9 @@
 Array.matrix = function(m, n, initial) {
-/* Create an m X n dimensional matrix. */
+/* Create an m X n dimensional matrix with an initial value. */
 	var a, i, j, mat = [];
-	for (i = 0; i < m; i += 1) {
+	for (i = 0; i < m; ++i) {
 		a = [];
-		for (j = 0; j < n; j += 1) {
+		for (j = 0; j < n; ++j) {
 			a[j] = initial;
 		}
 		mat[i] = a;
@@ -13,8 +13,9 @@ Array.matrix = function(m, n, initial) {
 
 function read_matrix(id) {
 /* Given an html id read a matrix from the DOM. */
-	var nrows = document.getElementById(id).rows.length-1;
+	var nrows = document.getElementById(id).rows.length;
 	var ncols = document.getElementById(id).rows[0].cells.length;
+    console.log("nrows: "+nrows+"ncols"+ncols);
 	mat = Array.matrix(nrows, ncols, 0);
 	for (r = 0; r < nrows; ++r) {
 		for (c = 0; c < ncols; ++c) {
@@ -75,7 +76,7 @@ function create_matrix() { //(id) removed. Will generate both at once
 }
 
 function multiply_matrix(a, b){
-  var mat = read_matrix("matA_tbl");
+  var mat = read_matrix("matA");
   console.log(mat);
   for (var i = 0; i < 2; ++i) {
     for (var j = 0; j < 2; ++j) {
