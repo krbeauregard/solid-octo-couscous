@@ -25,7 +25,7 @@ function read_matrix(id) {
 		}
 	}
     return mat;
-} 
+}
 
 
 function create_matrix() { //(id) removed. Will generate both at once
@@ -35,6 +35,7 @@ function create_matrix() { //(id) removed. Will generate both at once
     i_last = 0;   //Apparently, these should be reset as well...
     j_last = 0;
     k_last = 0;
+		document.getElementById('matC').innerHTML = '';
     var mtxA = '';
     var mtxB = '';
     var mat = '';
@@ -45,7 +46,7 @@ function create_matrix() { //(id) removed. Will generate both at once
     colsB = document.getElementById('colsB').value;
 
     for (var i = 0; i<rowsA; i++){
-		
+
       mtxA += '<tr>';
       for (var j = 0; j<colsA; j++){
         num = Math.floor(Math.random()*9);
@@ -57,7 +58,7 @@ function create_matrix() { //(id) removed. Will generate both at once
 	  }
       mtxA += '</tr>';
     }
-    document.getElementById('matA').innerHTML = mtxA;
+		document.getElementById('matA').innerHTML = mtxA;
     console.log(mtxA);
 
     for (var i = 0; i<rowsB; i++){
