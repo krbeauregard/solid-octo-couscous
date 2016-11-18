@@ -10,6 +10,7 @@
         crossorigin="anonymous">
 	<meta http-equiv="content-type" content="text/php; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link href="themes/prism.css" rel="stylesheet" />
 </head>
 <!-- End Header -->
 
@@ -19,8 +20,8 @@
     <h2>Title goes here</h2>
     <ul class="nav nav-pills" role="tablist">
       <li><a href="layout_test.html">Home</a></li>
-      <li  class="active"><a href="LinAlg.html" data-toggle="tab">Multiplication</a></li>
-      <li><a href="#">RREF</a></li>
+      <li  class="active"><a href="LinAlg.html">Multiplication</a></li>
+      <li><a href="rref.html">RREF</a></li>
       <li><a href="#">Inversion</a></li>
       <li><a href="#">Determinant</a></li>
       <li><a href="#">Eigen-@#$Y</a></li>
@@ -103,25 +104,27 @@
 
       <table>
         <tbody>
-          <tr><td id='istep%20'><td id='jstep'><td id='kstep'>
+          <tr><td id='istep'><td id='jstep'><td id='kstep'>
         </tbody>
       </table>
 
     </div>
-
     <div>
-      <p>for i in range(len(matrixA)):</p>
-      <p style="margin-left: 25px">for j in range(len(matrixB[0]])):</p>
-      <p style="margin-left: 50px">total = 0</p>
-      <p style="margin-left: 50px">for k in range(len(matrixB)):</p>
-      <p style="margin-left: 100px">total += matrixA[i][k]*matrixB[k][j]</p>
-      <p style="margin-left: 50px">matrixC[i][j] = s
-    </div>
-    <!-- <div id='testval'></div> -->
+<pre><code class="language-python">
+      <p>for i in range(len(matrixA)):<br>
+      &emsp;for j in range(len(matrixB[0]])):<br>
+      &emsp;&emsp;total = 0<br>
+      &emsp;&emsp;for k in range(len(matrixB)):<br>
+      &emsp;&emsp;&emsp;total += matrixA[i][k]*matrixB[k][j]<br>
+      &emsp;matrixC[i][j] = s</p>
+  </code></pre>
+</div>
+
 </form>
 
 </body>
 
 <!-- Begin Javascript -->
 <script src='linear_math.js'></script>
+<script src="themes/prism.js"></script>
 <!-- End Javascript -->
