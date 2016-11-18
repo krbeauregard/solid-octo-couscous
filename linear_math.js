@@ -1,4 +1,33 @@
-function create_matrix()  { //(id) removed. Will generate both at once
+Array.matrix = function(m, n, initial) {
+/* Create an m X n dimensional matrix. */
+	var a, i, j, mat = [];
+	for (i = 0; i < m; i += 1) {
+		a = [];
+		for (j = 0; j < n; j += 1) {
+			a[j] = initial;
+		}
+		mat[i] = a;
+	}
+	return mat;
+}
+
+function read_matrix(id) {
+/* Given an html id read a matrix from the DOM. */
+	var nrows = document.getElementById(id).rows.length-1;
+	var ncols = document.getElementById(id).rows[0].cells.length;
+	mat = Array.matrix(nrows, ncols, 0);
+	for (r = 0; r < nrows; ++r) {
+		for (c = 0; c < ncols; ++c) {
+            console.log("nrows: " + r);
+            console.log("ncols: " + c);
+            mat[r][c] = document.getElementById("A"+r+""+c).innerHTML;
+		}
+	}
+    return mat;
+} 
+
+
+function create_matrix() { //(id) removed. Will generate both at once
     i_step = -1;  //resets counter on generate   button press
     j_step = -1;  //so the step funcion can be used many times
     k_step = 0;   //without having to reset the page.
@@ -46,6 +75,13 @@ function create_matrix()  { //(id) removed. Will generate both at once
 }
 
 function multiply_matrix(a, b){
+  var mat = read_matrix("matA_tbl");
+  console.log(mat);
+  for (var i = 0; i < 2; ++i) {
+    for (var j = 0; j < 2; ++j) {
+      console.log(mat[i][j]);
+    }
+  }
     var matA = a;
     var matB = b;
     var mytable = '';
@@ -139,11 +175,9 @@ function step(a, b, c){
       }
       axb += '('+cellAIK+'*'+cellBKJ+')'
       sum += parseInt(cellAIK)*parseInt(cellBKJ);
-	  aik += "$$\\sqrt{2}$$";
-      //aik += 'A('+(i_step+1)+','+k_step+')='+cellAIK;
+      aik += 'A('+(i_step+1)+','+k_step+')='+cellAIK;
       bkj += 'B('+k_step+','+(j_step+1)+')='+cellBKJ;
       cij += 'C('+(i_step+1)+','+(j_step+1)+')='+axb+'='+sum;
-		MathJax.Hub.Typeset();
       document.getElementById('cellA').innerHTML = aik;
       document.getElementById('cellB').innerHTML = bkj;
       document.getElementById('cellC').innerHTML = cij;

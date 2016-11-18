@@ -11,6 +11,7 @@
 	<meta http-equiv="content-type" content="text/php; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="themes/prism.css" rel="stylesheet" />
+  <script src='linear_math.js'></script>
 </head>
 <!-- End Header -->
 
@@ -36,7 +37,7 @@
         <div class="col-md-3">
 
 <!--_____________________________Matrix A__________________________________-->
-          <table class="table table-sm">
+          <table class="table table-sm" id="matA_tbl">
             <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
             <tbody id='matA' class="matrix">&nbsp;</tbody>
           </table>
@@ -124,7 +125,6 @@
 
     </div>
 
-		$$\sqrt{2}$$
     <pre>
       <code class="language-python">
             <p>for i in range(len(matrixA)):<br>
@@ -141,7 +141,6 @@
 </body>
 
 <!-- Begin Javascript -->
-<script src='linear_math.js'></script>
 <script src="themes/prism.js"></script>
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
