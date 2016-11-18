@@ -1,28 +1,39 @@
-function create_matrix(id){
-    var mytable = '';
+function create_matrix()  { //(id) removed. Will generate both at once
+    i_step = -1;  //resets counter on generate   button press
+    j_step = -1;  //so the step funcion can be used many times
+    k_step = 0;   //without having to reset the page.
+    i_last = 0;   //Apparently, these should be reset as well...
+    j_last = 0;
+    k_last = 0;
+    var mtxA = '';
+    var mtxB = '';
     var mat = '';
     var num = 0;
-    if (id == 0){
-      rows = document.getElementById('rowsA').value ;
-      cols = document.getElementById('colsA').value ;
-    } else {
-      rows = document.getElementById('rowsB').value;
-      cols = document.getElementById('colsB').value;
-    }
-    for (var i = 0; i <rows; i++){
-      mytable += '<tr>';
-      for (var j = 0; j<cols; j++){
-        // if (j%2 == 0){
+    rowsA = document.getElementById('rowsA').value ;
+    colsA = document.getElementById('colsA').value ;
+    rowsB = document.getElementById('rowsB').value;
+    colsB = document.getElementById('colsB').value;
+
+    for (var i = 0; i<rowsA; i++){
+      mtxA += '<tr>';
+      for (var j = 0; j<colsA; j++){
         num = Math.floor(Math.random()*9);
-        mytable += "<td class='text-center'>["+num+"]</td>";
-      // }else{
-      //     mytable += "<td class='text-center highlight'>["+Math.floor((Math.random() * 90) + 10)+"]</td>";
-      //   }
+        mtxA += "<td class='text-center'>["+num+"]</td>";
       }
-      mytable += '</tr>';
+      mtxA += '</tr>';
     }
-    id == 0? (mat = 'matA') : (mat = 'matB');
-    document.getElementById(mat).innerHTML = mytable;
+    document.getElementById('matA').innerHTML = mtxA;
+    console.log(mtxA);
+
+    for (var i = 0; i<rowsB; i++){
+      mtxB += '<tr>';
+      for (var j = 0; j<colsB; j++){
+        num = Math.floor(Math.random()*9);
+        mtxB += "<td class='text-center'>["+num+"]</td>";
+      }
+      mtxB += '</tr>';
+    }
+    document.getElementById('matB').innerHTML = mtxB;
 }
 
 function multiply_matrix(a, b){
