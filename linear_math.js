@@ -11,6 +11,7 @@ Array.matrix = function(m, n, initial) {
 	return mat;
 }
 
+
 function read_matrix(id) {
 /* Given an html id read a matrix from the DOM. */
 	var nrows = document.getElementById(id).rows.length;
@@ -26,7 +27,6 @@ function read_matrix(id) {
 	}
     return mat;
 }
-
 
 function create_matrix() { //(id) removed. Will generate both at once
     i_step = -1;  //resets counter on generate   button press
