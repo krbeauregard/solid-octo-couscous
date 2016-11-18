@@ -8,7 +8,6 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-	<meta http-equiv="content-type" content="text/php; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="themes/prism.css" rel="stylesheet" />
   <script src='linear_math.js'></script>
@@ -46,15 +45,21 @@
             <span class="input-group-addon">
               <input class="cols-md-1 form-control"
                      id="rowsA"
-                     type="text"
-                     aria-label="input for rowsA">
+                     type="number"
+                     aria-label="input for rowsA"
+                     value="4"
+                     min="1"
+										 placeholder="rows">
             </span>
 
             <span class="input-group-addon">
               <input class="col-xs-1 form-control" 
                      id="colsA"
-                     type="text"
-                     aria-label="input for colsA">
+                     type="number"
+                     value="4"
+                     min="1"
+                     aria-label="input for colsA"
+										 placeholder="cols">
             </span>
           </div><!-- end the input group -->
         </div> <!--end col-md-4 -->
@@ -70,16 +75,20 @@
 						<span class="input-group-addon">
 							<input class="col-xs-1 form-control"
 										 id="rowsB"
-										 type="text"
+										 type="number"
 										 aria-label="input for rowsB"
+                     value="4"
+                     min="1"
 										 placeholder="rows">
 						</span>
 
 						<span class="input-group-addon">
 							<input class="col-xs-1 form-control" 
 										 id="colsB"
-										 type="text"
+										 type="number"
 										 aria-label="input for colsB"
+                     value="4"
+                     min="1"
 										 placeholder="cols">
 						</span>
 
@@ -142,6 +151,7 @@
 
 <!-- Begin Javascript -->
 <script src="themes/prism.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"</script>
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
