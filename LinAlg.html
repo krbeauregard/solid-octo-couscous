@@ -17,6 +17,7 @@
 <body>
   <div class="container">
     <h2>Title goes here</h2>
+
     <ul class="nav nav-pills" role="tablist">
       <li><a href="layout_test.html">Home</a></li>
       <li  class="active"><a href="LinAlg.html" data-toggle="tab">Multiplication</a></li>
@@ -24,81 +25,69 @@
       <li><a href="#">Inversion</a></li>
       <li><a href="#">Determinant</a></li>
       <li><a href="#">Eigen-@#$Y</a></li>
-    </ul>
-  <h1 style="padding:40px" class='text-center '>Matrix Multiplication</h1>
+    </ul> <!-- end main menu -->
 
-  <form style='float:left; position: relative; margin:8px' class='form-inline'>
-    <div>
-      <div><label>Matrix A</label></div>
-    <div style='color:blue' class='form-group'>
-      <label for='rowsA'>Rows:</label>
-      <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsA'>
-    </div>
+    <h1 style="padding:40px" class='text-center '>Matrix Multiplication</h1>
 
-    <div style='color:green' class='form-group'>
-      <label for='colsA'>Columns:</label>
-      <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsA'>
-    </div>
-    <!-- <button type='button' class='btn btn-default' onclick='create_matrix(0)'>Generate Matrix A</button> -->
-</div>
-    <div class='form-group'></div>
-    <div><label>Matrix B</label></div>
+    <form style='float:left; position: relative; margin:8px' class='form-horizontal'>
 
+    <div class="row">
+    <div class="col-md-4">
+
+      <h3>Matrix A</h3>
+      <div style='color:blue' class='form-group'>
+        <label class="control-label" for='rowsA'>Rows:</label>
+        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsA'>
+      </div> <!-- end of row input -->
+
+      <div style='color:green' class='form-group'>
+        <label for='colsA'>Columns:</label>
+        <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsA'>
+      </div> <!-- end column input -->
+
+      <h3>Matrix B</h3>
       <div style='color:green' class='form-group'>
         <label for='rowsB'>Rows:</label>
         <input style='width:60px' type='number' value='4' min='1' class='form-control' id='rowsB'>
-      </div>
+      </div> <!-- end row input -->
 
       <div style='color:red' class='form-group'>
         <label for='colsB'>Columns:</label>
         <input style='width:60px' type='number' value='4' min='1' class='form-control' id='colsB'>
-      </div>
+      </div> <!-- end column input -->
+
       <div style="padding:25px">
         <button type='button' class='btn btn-default' onclick="create_matrix()">Generate Matrices</button>
-      </div>
-      <!-- <button type='button' class='btn btn-default' onclick="create_matrix(1)">Generate Matrix B</button> -->
+      </div> <!-- end generate button -->
+    </div> <!-- end column -->
 
-      <div style="display:table; width:400px; margin:0 auto; text-align:center">
-        <div style="display: table-row;">
+    <div class="col-md-4">
+      <table>
+        <tbody id='matA'></tbody>
+      </table>
+    </div> <!--end col-md-4 -->
 
-          <div style="display:table-cell; padding:25px">
-              <table>
-              <tbody id='matA'></tbody>
-            </table>
-          </div>
-
-          <div style='display:table-cell; padding:25px'>
-            <table>
-              <tbody id='matB'></tbody>
-            </table>
-          </div>
-
-        </div>
-    </div>
+    <div class="col-md-4">
+      <table>
+        <tbody id='matB'></tbody>
+      </table>
+    </div> <!--end col-md-4 -->
 
     <div style="text-align:center">
       <button type='button' class="btn btn-default" onclick="multiply_matrix(matA, matB)">Multiply</button>
       <button type='button' class="btn btn-default" onclick="step(matA, matB, matC)">Next Step</button>
       <button type='submit' class='btn btn-default'>Reset Page  </button>
-    </div>
+    </div> <!-- end button group -->
 
-      <div style="display:table; width:1000px; margin:0 auto; padding:25px; text-align:center;">
-        <!-- width above screws with entire page?! -->
-        <div style="display: table-col;">
-          <div style="display:table-cell;">
-            <table>
-              <tbody id='matC'></tbody>
-            </table>
-          </div>
-        </div>
+    <table>
+      <tbody id='matC'></tbody>
+    </table>
+
+      <div style="display:table-cell; padding:25px;">
+        <p id='cellA'></p>
+        <p id='cellB'></p>
+        <p id='cellC'></p>
       </div>
-      <div>
-
-          <div style="display:table-cell; padding:25px;">
-            <p id='cellA'></p>
-            <p id='cellB'></p>
-            <p id='cellC'></p>
-          </div>
 
       <table>
         <tbody>
@@ -106,20 +95,17 @@
         </tbody>
       </table>
 
-    </div>
+    </div> <!-- end some kind of table that does something -->
 
-    <div>
-      <p>for i in range(len(matrixA)):</p>
-      <p style="margin-left: 25px">for j in range(len(matrixB[0]])):</p>
-      <p style="margin-left: 50px">total = 0</p>
-      <p style="margin-left: 50px">for k in range(len(matrixB)):</p>
-      <p style="margin-left: 100px">total += matrixA[i][k]*matrixB[k][j]</p>
-      <p style="margin-left: 50px">matrixC[i][j] = s
-    </div>
-    <!-- <div id='testval'></div> -->
-</form>
-  </div>
+    <p>for i in range(len(matrixA)):</p>
+    <p style="margin-left: 25px">for j in range(len(matrixB[0]])):</p>
+    <p style="margin-left: 50px">total = 0</p>
+    <p style="margin-left: 50px">for k in range(len(matrixB)):</p>
+    <p style="margin-left: 100px">total += matrixA[i][k]*matrixB[k][j]</p>
+    <p style="margin-left: 50px">matrixC[i][j] = s
 
+  </form>
+</div> <!-- end of container -->
 </body>
 
 <!-- Begin Javascript -->
