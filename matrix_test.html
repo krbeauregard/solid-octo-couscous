@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <div id="mat1"></div>
+  <button onclick="printit()">printit</button>
+  <script>
+    function printit() {
+      mat = new matrix(3, 3, 7);
+      div = document.getElementById("mat1");
+      div.innerHTML = mat.html_table();
+    }
+  </script>
+  <script async src="linear.js"></script>
+</body>
+</html>
