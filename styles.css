@@ -18,6 +18,10 @@ body {
     background-color: white;
 }
 
+.table {
+    table-layout: fixed;
+}
+
 .matrix {
     position: relative;
 	overflow:scroll;
