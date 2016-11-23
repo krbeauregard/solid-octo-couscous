@@ -108,6 +108,7 @@ function matrix(m, n, initial) {
             }
             return mat;
         },
+
         /*********************************************************************
          * Given the id of a table body containing a matrix.
          * Construct a matrix object.
@@ -237,20 +238,19 @@ function ludcmp(mat) {
                 temp = 0,
                 vv = [];
             this.d = 1.0;
-            
-            this.lu.print();
-            for (i = 0; i < this.n; ++i) {
+           
+            for (var i = 0; i < this.n; ++i) {
                 big = 0.0;
-                for (j = 0; j < this.n; ++j) {
+                for (var j = 0; j < this.n; ++j) {
                     temp = Math.abs(this.lu.data[i][j]);
                     if (temp > big) big = temp;
                 }
                 if (big === 0.0) return;
                 vv[i] = 1.0 / big;
             }
-            for (k = 0; i < this.n; ++k) {
+            for (var k = 0; i < this.n; ++k) {
                 big = 0.0;
-                for ( i = k; i < this.n; ++i) {
+                for (var i = k; i < this.n; ++i) {
                     temp = vv[i] * Math.abs(this.lu[i][k]);
                     if (temp > big) {
                         big = temp;
@@ -258,7 +258,7 @@ function ludcmp(mat) {
                     }
                 }
                 if (k !== imax) {
-                    for (j = 0; j < this.n; ++j) {
+                    for (var j = 0; j < this.n; ++j) {
                         temp = this.lu[imax][j];
                         this.lu[imax][j] = this.lu[k][j];
                         this.lu[k][j] = temp;
@@ -270,7 +270,7 @@ function ludcmp(mat) {
                 
                 if (this.lu[k][k] === 0.0) this.lu[k][k] = tiny;
 
-                for (i = k+1; i < this.n; ++i) {
+                for (var i = k+1; i < this.n; ++i) {
                     temp = this.lu[i][k] /= this.lu[k][k];
                     for (j = k+1; j < n; ++j) {
                         this.lu[i][j] -= temp * this.lu[k][j];
