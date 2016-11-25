@@ -173,7 +173,8 @@ function matrix(m, n, initial) {
                 str += "<tr>";
                 for (j = 0; j < this.n; ++j) {
                     var elemid = "A"+i+""+j;
-                    str += "<td id="+elemid+">"+this.get(i, j)+"</td>";
+                    var rounded = Math.round(100*this.get(i, j))/ 100;
+                    str += "<td id="+elemid+">"+rounded+"</td>";
                 }
                 str += "</tr>";
             }
