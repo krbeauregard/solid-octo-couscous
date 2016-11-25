@@ -8,9 +8,8 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <link href="themes/prism.css" rel="stylesheet" />
-  <script src='linear_math.js'></script>
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<link href="themes/prism.css" rel="stylesheet" />
 </head>
 <!-- End Header -->
 
@@ -32,12 +31,12 @@
     </nav>
 
   <div class="container">
+    <!--_____________________________Matrix A__________________________________-->
     <div class="row">
         <div class="col-md-3">
-
-<!--_____________________________Matrix A__________________________________-->
-          <table class="table table-sm" id="matA_tbl">
-            <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
+          <!-- <table class="table table-sm" id="matA_tbl"> -->
+          <table class="table table-sm">
+            <thead><tr><th scope='colgroup'>Matrix A</th></tr></thead>
             <tbody id='matA' class="matrix">&nbsp;</tbody>
           </table>
 
@@ -46,14 +45,14 @@
               <input class="cols-md-1 form-control"
                      id="rowsA"
                      type="number"
-                     aria-label="input for rowsA"
                      value="4"
                      min="1"
+                     aria-label="input for rowsA"
 										 placeholder="rows">
             </span>
 
             <span class="input-group-addon">
-              <input class="col-xs-1 form-control" 
+              <input class="col-xs-1 form-control"
                      id="colsA"
                      type="number"
                      value="4"
@@ -67,7 +66,7 @@
 <!--_____________________________Matrix B__________________________________-->
 				<div class="col-md-3">
 					<table class="table table-sm">
-						<thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
+						<thead><tr><th scope='colgroup'>Matrix B</th></tr></thead>
 						<tbody id='matB' class="matrix">&nbsp;</tbody>
 					</table>
 
@@ -76,22 +75,21 @@
 							<input class="col-xs-1 form-control"
 										 id="rowsB"
 										 type="number"
-										 aria-label="input for rowsB"
                      value="4"
                      min="1"
+                     aria-label="input for rowsB"
 										 placeholder="rows">
 						</span>
 
 						<span class="input-group-addon">
-							<input class="col-xs-1 form-control" 
+							<input class="col-xs-1 form-control"
 										 id="colsB"
 										 type="number"
-										 aria-label="input for colsB"
                      value="4"
                      min="1"
+                     aria-label="inpu t for colsB"
 										 placeholder="cols">
 						</span>
-
 
 					</div><!-- end the input group -->
 				</div> <!-- end col-md-4 -->
@@ -99,24 +97,25 @@
 <!--_____________________________Matrix C__________________________________-->
 				<div style="margin-top:20px" class="col-md-3">
 					<table class="table table-sm">
-						<thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
+						<thead><tr><th scope='colgroup'>Matrix C</th></tr></thead>
 						<tbody id='matC' class="matrix"></tbody>
 					</table>
-				</div><!-- end column for matrix C -->
+				</div>
+        <!-- end column for matrix C -->
 
-				<div class="input-group">
+				<div class="input-group col-md-3">
+          <span class="input-group-addon">
+              <button class="btn" onclick="matrix(3,3,0).tobrowser(matA, 'Matrix A')" type="button" aria-label="input for m">Generate</button>
+          </span>
 					<span class="input-group-addon">
 						<button type='button' class="btn btn-secondary" onclick="multiply_matrix(matA, matB)">Multiply</button>
 					</span>
 					<span class="input-group-addon">
 						<button type='button' class="btn btn-secondary" onclick="step(matA, matB, matC)">Next Step</button>
 					</span>
-					<span class="input-group-addon">
+					<!-- <span class="input-group-addon">
 						<button type='submit' class="btn btn-secondary">Reset Page</button>
-					</span>
-					<span class="input-group-addon">
-						<button class="btn" onclick="create_matrix()" type="button" aria-label="input for m">Generate</button>
-					</span>
+					</span> -->
 				</div> <!-- end dimension input row-->
 
 
@@ -154,5 +153,8 @@
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"</script>
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+<script src='linear_math.js'></script>
+<script src='mat.js'></script>
 </script>
 <!-- End Javascript -->

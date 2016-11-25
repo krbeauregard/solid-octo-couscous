@@ -1,64 +1,87 @@
-<!DOCTYPE html>
+.<!DOCTYPE html>
 <html lang="en">
 <!-- Begin Header -->
 <head>
   <title class="highlight">Linear Algebra in a Browser</title>
+  <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-  <meta http-equiv="content-type" content="text/php; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="styles.css">
-
+  <link href="themes/prism.css" rel="stylesheet" />
 </head>
 <!-- End Header -->
 
 <!-- Begin Body -->
 <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <a class="navbar-brand">Visualize Linear Algebra</a>
+      <ul class="nav navbar-nav nav-pills" role="tablist">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="matrix_multiplication.html">Multiplication</a></li>
+        <li class="active"><a href="rref.html">RREF</a></li>
+        <li><a href="inverse.html">Inverse</a></li>
+        <li><a href="determinant.html">Determinant</a></li>
+        <li><a href="eigen.html">Eigen-@#$Y</a></li>
+      </ul> <!-- end main menu -->
+    </div> <!-- end navbar container -->
+  </nav>
+  <h1  class='text-center '>RREF</h1>
+
   <div class="container">
-    <h2>Title goes here</h2>
-    <ul class="nav nav-pills" role="tablist">
-      <li><a href="layout_test.html">Home</a></li>
-      <li><a href="LinAlg.html">Multiplication</a></li>
-      <li  class="active"><a href="rref.html">RREF</a></li>
-      <li><a href="#">Inversion</a></li>
-      <li><a href="#">Determinant</a></li>
-      <li><a href="#">Eigen-@#$Y</a></li>
-    </ul>
-    <h1 style="padding:40px" class='text-center '>RREF</h1>
   <form style="float:left; position:relative;margin:8px" class='form-horizontal'>
     <div class='row'>
-    <div class='col-md-4'>
-      <h3>Matrix Dimensions</h3>
-      <div style='color:blue' class='form-group'>
-        <label class='control-label' for='rows'>Rows:</label>
-        <input style='width:60px' type='number' value='2' min='1' class='form-control' id='rows'>
+      <div class='col-md-4'>
+        <h3>Matrix Dimensions</h3>
+        <div style='color:blue' class='form-group'>
+          <label class='control-label' for='rows'>Rows:</label>
+          <input style='width:60px' type='number' value='2' min='1' class='form-control' id='rows'>
+        </div>
+        <div style='color:green' class='form-group'>
+          <label class='control-label' for='cols'>Columns:</label>
+          <input style='width:60px' type='number' value='2' min='1' class='form-control' id='cols'>
+        </div>
+        <div>
+          <button type='button' class = 'btn' onclick="matrix(3,3,0)">Generate</button>
+        </div>
       </div>
-      <div style='color:green' class='form-group'>
-        <label class='control-label' for='cols'>Columns:</label>
-        <input style='width:60px' type='number' value='2' min='1' class='form-control' id='cols'>
-      </div>
-
     </div>
+    <div>
+      <p id='matA'></p>
     </div>
   </form>
-<script>
-window.onload = function() {
-var A = [[2, 2, 5, 6],
-				 [1, 1, -2, 2]];
+<pre>
+  <code class="language-python">
+        <p>for i in range(len(matrixA)):<br>
+        &emsp;for j in range(len(matrixB[0]])):<br>
+        &emsp;&emsp;total = 0<br>
+        &emsp;&emsp;for k in range(len(matrixB)):<br>
+        &emsp;&emsp;&emsp;total += matrixA[i][k]*matrixB[k][j]<br>
+        &emsp;matrixC[i][j] = s</p>
+    </code>
+</pre>
 
-var B = [[1, 2],
-		     [-1, 1],
-         [2, 2],
-         [0, 2]]
-alert(rref(B));
-};
-</script>
 </div>
 </body>
 <!-- End Body -->
-</html>
+<!-- </html> -->
+<!-- <script>
+window.onload = function() {
+  var A = [[2, 2, 5, 6],
+  [1, 1, -2, 2]];
+
+  var B = [[1, 2],
+  [-1, 1],
+  [2, 2],
+  [0, 2]]
+  alert(rref(B));
+};
+</script> -->
 
 <!-- Begin Javascript -->
-<script src="rref.js"></script>
+<script src="linear.js"></script>
+<!-- <script src='linear_math.js'></script> -->
+<script src="themes/prism.js"></script>
 <!-- End Javascript -->

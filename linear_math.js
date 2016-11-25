@@ -50,12 +50,12 @@ function create_matrix() { //(id) removed. Will generate both at once
       mtxA += '<tr>';
       for (var j = 0; j<colsA; j++){
         num = Math.floor(Math.random()*9);
-		var coord = "";
-		coord += "A" + i + j;
-		// Add the matrix coordinates as an ID
+				var coord = "";
+				coord += "A" + i + j;
+				// Add the matrix coordinates as an ID
         mtxA += "<td class='col-md-1 text-center' id='";
-		mtxA += coord + "'>" + num + "</td>";
-	  }
+				mtxA += coord + "'>" + num + "</td>";
+		  }
       mtxA += '</tr>';
     }
 		document.getElementById('matA').innerHTML = mtxA;
