@@ -48,6 +48,19 @@ function matrix(m, n, initial) {
             //m.data = this.data.slice(0, -1);
             return m;
         },
+        
+        /*********************************************************************
+        * Given a matrix rhs (right hand side)
+        * Return true if this matrix is equal to rhs.
+        *********************************************************************/
+        equals: function(rhs) {
+            if (this.m !== rhs.m || this.n !== rhs.n) return false;
+            for (var i = 0; i < rhs.m; ++i)
+                for (var j = 0; j < rhs.n; ++j)
+                    if (this.get(i, j) !== rhs.get(i, j)) return false;
+            return true;
+        },
+
 
         /*********************************************************************
          * Create a matrix from an array of arrays.
@@ -398,7 +411,7 @@ function test_det() {
 
 /* Driver for all the tests */
 function test() {
-    //test_equals();
+    test_equals();
     //test_fromarray();
     //test_within_bounds();
     //test_copy_by_value();
