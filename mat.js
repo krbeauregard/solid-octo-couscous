@@ -49,6 +49,16 @@ function matrix(m, n, initial) {
             return m;
         },
 
+        equals: function(rhs_mat) {
+             if (this.m !== rhs_mat.m || this.n !== rhs_mat.n) return false;
+             for (var i = 0; i < this.m; ++i) {
+                for (var j = 0; j < this.n; ++j) {
+                    if (this.get(i, j) !== rhs_mat.get(i, j)) return false;
+                }
+             }
+             return true;
+        },
+
         /*********************************************************************
          * Create a matrix from an array of arrays.
          ********************************************************************/
@@ -245,7 +255,7 @@ function ludcmp(mat) {
         indx: [],                           // Stores the permutation
         d: 0.0,                             // Used by det
 
-        init: function(mat) {
+        init: function() {
             this.n = this.lu.m;
             this.indx = this.n;
             var tiny = 1.0e-40,             // A small number
@@ -301,14 +311,38 @@ function ludcmp(mat) {
     }
 }
 
-function test() {
-    a1 = [[1, 0, 2],
-          [2, 4, 1],
-          [5, 4, 2]];
+function test_equals() {
+    a1 = [[1, 2],
+          [3, 4]];
+    a2 = [[1, 2, 0], 
+          [3, 4, 1],
+          [0, 2, 4]];
+    m1 = matrix();
+    m1.fromarray(a1);
+
+    m2 = matrix();
+    m2.fromarray(a1);
+
+    m3 = matrix();
+    m3.init(3, 3, 0);
+
+    m4 = matrix();
+    m4.init(a2);
+
+    console.log("Test equals matrix works correctly: " + m1.equals(m2));
+    console.log("Test unequal matrix works correctly: " + !m1.equals(m3));
+    console.log("Test equal with wrong dimensions works correctly: " + !m1.equals(m4));
+}
+
+function test_fromarray() {
+    a1 = [[4, 3],
+          [6, 3]];
     m1 = matrix();
     m1.fromarray(a1);
     m1.print();
-    lud = ludcmp(m1);
-    lud.lu.print();
+}
+
+function test() {
+    test_equals();
 }
 test();
