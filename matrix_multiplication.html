@@ -16,7 +16,6 @@
 
 <!-- Begin Body -->
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <a class="navbar-brand">Visualize Linear Algebra</a>
@@ -24,9 +23,9 @@
           <li><a href="home.html">Home</a></li>
           <li class="active"><a href="matrix_multiplication.html">Multiplication</a></li>
           <li><a href="rref.html">RREF</a></li>
-          <li><a href="#">Inverse</a></li>
-          <li><a href="#">Determinant</a></li>
-          <li><a href="#">Eigen-@#$Y</a></li>
+          <li><a href="inverse.html">Inverse</a></li>
+          <li><a href="determinant.html">Determinant</a></li>
+          <li><a href="eigen.html">Eigen-@#$*</a></li>
         </ul> <!-- end main menu -->
       </div> <!-- end navbar container -->
     </nav>
@@ -154,11 +153,18 @@ var create_matrix_button = document.getElementById("create_matrix_button");
 var multiply_button = document.getElementById("multiply_button");
 
 create_matrix_button.addEventListener("click", function(e) {
+  var ai = document.getElementById('rowsA').value;
+  var aj = document.getElementById('colsA').value;
+  var bi = document.getElementById('rowsB').value;
+  var bj = document.getElementById('colsB').value;
   m = matrix();
-  m.init(3,3,0);
+  m.random_int_mat(ai, aj,0,9);
+  n = matrix();
+  n.random_int_mat(bi, bj,0,9);
   m.tobrowser("mat0", "Matrix A");
-  m.tobrowser("mat1", "Matrix B");
+  n.tobrowser("mat1", "Matrix B");
   m.print();
+  n.print();
   console.log("Howdy! ", e);
 }, false);
 
