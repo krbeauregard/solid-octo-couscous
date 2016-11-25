@@ -81,7 +81,7 @@ function matrix(m, n, initial) {
             var str = "";
             for (i = 0; i < this.data.length; ++i) {
                 for (j = 0; j < this.data[i].length; ++j) {
-                    str += this.data[i][j];
+                    str += Math.round(100*this.get(i, j)) / 100;
                     str += " "
                 }
                 str += "\n";
@@ -419,9 +419,9 @@ function test_det() {
 /* Driver for all the tests */
 function test() {
     test_equals();
-    //test_fromarray();
-    //test_within_bounds();
-    //test_copy_by_value();
+    test_fromarray();
+    test_within_bounds();
+    test_copy_by_value();
     test_ludcmp();
     test_det();
 }
