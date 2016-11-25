@@ -91,11 +91,11 @@ function matrix(m, n, initial) {
          * Check whether m and n are within the bounds of the matrix.
          ********************************************************************/
         within_bounds: function(m ,n) {
-            if (m > this.m || m < 0) {
+            if (m > (this.m-1) || m < 0) {
                 console.log("Error: trying to access outside the range of matrix row.");
                 return false;
             }
-            if (n > this.n) {
+            if (n > (this.n-1)) {
                 console.log("Error: Trying to access outside range of matrix row.");
                 return false;
             }
@@ -311,6 +311,13 @@ function ludcmp(mat) {
     }
 }
 
+
+/*****************************************************************************
+ **************************** BEGIN TESTS ************************************
+ * When you need to test a function just add a new function called
+ * test_[yourfunction] then call it in the test function at the bottom.
+ * This allows us to test quickly without using the browser.
+ ****************************************************************************/
 function test_equals() {
     a1 = [[1, 2],
           [3, 4]];
@@ -334,15 +341,54 @@ function test_equals() {
     console.log("Test equal with wrong dimensions works correctly: " + !m1.equals(m4));
 }
 
+function test_within_bounds() {
+    var a1 = [[1, 2],
+          [3, 4]];
+    var m = matrix();
+    m.fromarray(a1);
+
+    console.log("Test within bounds works correctly: " + m.within_bounds(0,0));
+    console.log("Test outside bounds works correctly: " + m.within_bounds(2,2));
+}
+
+function test_copy_by_value() {
+    var a1 = [[1, 2],
+          [3, 4]];
+    var orig = matrix();
+    orig.fromarray(a1);
+    var dup = orig.copy();
+    dup.set(1, 1, 0);
+    console.log("Copy didn't change original: " + !orig.equals(dup));
+    orig.print();
+    dup.print();
+}
+
 function test_fromarray() {
     a1 = [[4, 3],
           [6, 3]];
     m1 = matrix();
+    console.log("Matrix fromarry: ");
     m1.fromarray(a1);
     m1.print();
 }
 
+function test_ludcmp() {
+    a1 = [[4, 3],
+          [6, 3]];
+    m1 = matrix();
+    m1.fromarray(a1);
+    lud = ludcmp(m1);
+    console.log("LUD matrix: ");
+    lud.lu.print();
+    console.log("LUD permutation: "+lud.d);
+}
+
+/* Driver for all the tests */
 function test() {
     test_equals();
+    test_fromarray();
+    test_within_bounds();
+    test_copy_by_value();
+    test_ludcmp();
 }
 test();
