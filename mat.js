@@ -263,47 +263,53 @@ function ludcmp(mat) {
                 imax = 0,
                 big = 0,
                 temp = 0,
-                vv = [];
+                vv = [];                    // Stores the implicit scaling of each row
             
-            this.d = 1.0;
+            this.d = 1.0;                   // No row interchanges yet
 
+            /* Loop of the rows to get the implicit scaling info. */
             for (var i = 0; i < this.n; ++i) {
                 big = 0.0;
                 for (var j = 0; j < this.n; ++j) {
                     temp = Math.abs(this.lu.get(i, j));
                     if (temp > big) big = temp;
                 }
-                if (big === 0.0) {console.log("Singular matrix in ludcmp"); return;}
+                if (big === 0.0) {
+                    console.log("Singular matrix in ludcmp");
+                    return;
+                }
                 vv[i] = 1.0 / big;      // Save the scaling
-                console.log("vv[i]: " + vv[i]);
             }
 
+            /* This is the outermost kij loop. */
             for (var k = 0; k < this.n; ++k) {
-                big = 0.0;
+                big = 0.0;  // Initialize for search for largest pivot element.
                 for (var i = k; i < this.n; ++i) {
                     temp = vv[i] * Math.abs(this.lu.get(i, k));
+                    /* Is the FOM for the pivot better than the best so far? */
                     if (temp > big) {
                         big = temp;
                         imax = i;
                     }
                 }
+                /* Do we need to interchange rows? */
                 if (k !== imax) {
                     for (var j = 0; j < this.n; ++j) {
                         temp = this.lu.get(imax, j);
                         this.lu.set(imax, j, this.lu.get(k, j));
+                        this.lu.set(k, j, temp);
                     }
                     this.d = (-1) * this.d;
                     vv[imax] = vv[k];
                 }
                 this.indx[k] = imax;
-                console.log("index: " + this.indx[k]);
                 
                 if (this.lu.get(k, k) === 0.0) this.lu.set(k, k, tiny);
 
                 for (var i = k+1; i < this.n; ++i) {
+                    temp = this.lu.get(i, k) / this.lu.get(k, k);
                     this.lu.set(i,k,this.lu.get(i,k)/this.lu.get(k,k));
 
-                    temp = this.lu.get(i, k) / this.lu.get(k, k);
                     for (j = k+1; j < this.n; ++j) {
                         this.lu.set(i,j, this.lu.get(i,j) - temp*this.lu.get(k,j));
                     }
@@ -312,14 +318,15 @@ function ludcmp(mat) {
         }, // end ludcmp init function
 
         det: function() {
-            dd = this.d;
+            var dd = this.d;
             for (var i = 0; i < this.n; ++i) {
-                dd *= this.lu.get(i, i);
+                dd = dd * this.lu.get(i, i);
             }
             return dd;
         },
-        inv: function() {},
+
         solve: function() {},
+        inv: function() {},
     }
 }
 
@@ -403,7 +410,7 @@ function test_det() {
     a1 = [[1, 2],
           [3, 4]];
     m1 = matrix();
-    m1.fromarray(m1);
+    m1.fromarray(a1);
     lud = ludcmp(m1);
     lud.init();
     console.log("Determinant: ", lud.det());
@@ -416,6 +423,6 @@ function test() {
     //test_within_bounds();
     //test_copy_by_value();
     test_ludcmp();
-    //test_det();
+    test_det();
 }
 test();
