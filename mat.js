@@ -250,34 +250,35 @@ function matrix(m, n, initial) {
  ****************************************************************************/
 function ludcmp(mat) {
     return {
-        n: 0,
+        n: mat.n,
         lu: mat.copy(),                     // Stores the decomposition
+        aref: mat.copy(),
         indx: [],                           // Stores the permutation
-        d: 0.0,                             // Used by det
+        d: 1.0,                             // Used by det
 
         init: function() {
             this.n = this.lu.m;
-            this.indx = this.n;
             var tiny = 1.0e-40,             // A small number
                 imax = 0,
                 big = 0,
                 temp = 0,
                 vv = [];
-            this.d = 1.0;
            
             for (var i = 0; i < this.n; ++i) {
                 big = 0.0;
                 for (var j = 0; j < this.n; ++j) {
-                    temp = Math.abs(this.lu.data[i][j]);
+                    temp = Math.abs(this.lu.get(i, j));
                     if (temp > big) big = temp;
                 }
-                if (big === 0.0) return;
-                vv[i] = 1.0 / big;
+                if (big === 0.0) {console.log("Singular matrix in ludcmp"); return;}
+                vv[i] = 1.0 / big;      // Save the scaling
+                console.log("vv[i]: " + vv[i]);
             }
-            for (var k = 0; i < this.n; ++k) {
+
+            for (var k = 0; k < this.n; ++k) {
                 big = 0.0;
                 for (var i = k; i < this.n; ++i) {
-                    temp = vv[i] * Math.abs(this.lu[i][k]);
+                    temp = vv[i] * Math.abs(this.lu.get(i, k));
                     if (temp > big) {
                         big = temp;
                         imax = i;
@@ -285,27 +286,35 @@ function ludcmp(mat) {
                 }
                 if (k !== imax) {
                     for (var j = 0; j < this.n; ++j) {
-                        temp = this.lu[imax][j];
-                        this.lu[imax][j] = this.lu[k][j];
-                        this.lu[k][j] = temp;
+                        temp = this.lu.get(imax, j);
+                        this.lu.set(imax, j, this.lu.get(k, j));
                     }
-                    d = -d;
+                    this.d = (-1) * this.d;
                     vv[imax] = vv[k];
                 }
-                indx[k] = imax;
+                this.indx[k] = imax;
+                console.log("index: " + this.indx[k]);
                 
-                if (this.lu[k][k] === 0.0) this.lu[k][k] = tiny;
+                if (this.lu.get(k, k) === 0.0) this.lu.set(k, k, tiny);
 
                 for (var i = k+1; i < this.n; ++i) {
-                    temp = this.lu[i][k] /= this.lu[k][k];
-                    for (j = k+1; j < n; ++j) {
-                        this.lu[i][j] -= temp * this.lu[k][j];
+                    this.lu.set(i,k,this.lu.get(i,k)/this.lu.get(k,k));
+
+                    temp = this.lu.get(i, k) / this.lu.get(k, k);
+                    for (j = k+1; j < this.n; ++j) {
+                        this.lu.set(i,j, this.lu.get(i,j) - temp*this.lu.get(k,j));
                     }
                 }
             }
         }, // end ludcmp init function
 
-        det: function() {},
+        det: function() {
+            dd = this.d;
+            for (var i = 0; i < this.n; ++i) {
+                dd *= this.lu.get(i, i);
+            }
+            return dd;
+        },
         inv: function() {},
         solve: function() {},
     }
@@ -348,7 +357,7 @@ function test_within_bounds() {
     m.fromarray(a1);
 
     console.log("Test within bounds works correctly: " + m.within_bounds(0,0));
-    console.log("Test outside bounds works correctly: " + m.within_bounds(2,2));
+    console.log("Test outside bounds works correctly: " + !m.within_bounds(2,2));
 }
 
 function test_copy_by_value() {
@@ -373,22 +382,38 @@ function test_fromarray() {
 }
 
 function test_ludcmp() {
-    a1 = [[4, 3],
-          [6, 3]];
+    a1 = [[2, 3, 2, 1],
+          [4, 8, 7, 3],
+          [2, 1, 0, 2],
+          [-4, -4, 1, 2]];
     m1 = matrix();
     m1.fromarray(a1);
+    console.log("Before LUD: ");
+    m1.print();
     lud = ludcmp(m1);
+    lud.init();
     console.log("LUD matrix: ");
     lud.lu.print();
-    console.log("LUD permutation: "+lud.d);
+    console.log("LUD permutation: "+lud.indx);
+}
+
+function test_det() {
+    a1 = [[1, 2],
+          [3, 4]];
+    m1 = matrix();
+    m1.fromarray(m1);
+    lud = ludcmp(m1);
+    lud.init();
+    console.log("Determinant: ", lud.det());
 }
 
 /* Driver for all the tests */
 function test() {
-    test_equals();
-    test_fromarray();
-    test_within_bounds();
-    test_copy_by_value();
+    //test_equals();
+    //test_fromarray();
+    //test_within_bounds();
+    //test_copy_by_value();
     test_ludcmp();
+    //test_det();
 }
 test();
