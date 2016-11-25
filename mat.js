@@ -1,4 +1,4 @@
-/*****************************************************************************
+ /*****************************************************************************
  * Return a matrix object that the following methods:
  *
  * init             - Initialize a matrix with a shape and initial values.
@@ -49,16 +49,6 @@ function matrix(m, n, initial) {
             return m;
         },
 
-        equals: function(rhs_mat) {
-             if (this.m !== rhs_mat.m || this.n !== rhs_mat.n) return false;
-             for (var i = 0; i < this.m; ++i) {
-                for (var j = 0; j < this.n; ++j) {
-                    if (this.get(i, j) !== rhs_mat.get(i, j)) return false;
-                }
-             }
-             return true;
-        },
-
         /*********************************************************************
          * Create a matrix from an array of arrays.
          ********************************************************************/
@@ -91,11 +81,11 @@ function matrix(m, n, initial) {
          * Check whether m and n are within the bounds of the matrix.
          ********************************************************************/
         within_bounds: function(m ,n) {
-            if (m > (this.m-1) || m < 0) {
+            if (m > this.m || m < 0) {
                 console.log("Error: trying to access outside the range of matrix row.");
                 return false;
             }
-            if (n > (this.n-1)) {
+            if (n > this.n) {
                 console.log("Error: Trying to access outside range of matrix row.");
                 return false;
             }
@@ -115,7 +105,7 @@ function matrix(m, n, initial) {
          * Set Matrix[m][n] to value.
          ********************************************************************/
         set: function(m, n, val) {
-            if (this.within_bounds(m, n)) this.data[m][n] = val; 
+            if (this.within_bounds(m, n)) this.data[m][n] = val;
         },
 
         /*********************************************************************
@@ -123,23 +113,21 @@ function matrix(m, n, initial) {
          * Generate a matrix with elements in the range [min, max]
          ********************************************************************/
         random_int_mat: function(m, n, min, max) {
-            var m = matrix();
-            m.init(m, n, 0);
+            this.init(m,n,0);
             if (m < 1 || n < 1) return;
             for (i = 0; i < m; ++i) {
                 for (j = 0; j < n; ++j) {
                     val = Math.floor(Math.random() * (max-min) + min);
-                    mat.data[i][j] = val;
+                    this.set(i,j,val);
                 }
             }
-            return mat;
         },
 
         /*********************************************************************
          * Given the id of a table body containing a matrix.
          * Construct a matrix object.
          *
-         * It's important to retrieve the table body here and not the table 
+         * It's important to retrieve the table body here and not the table
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
@@ -167,7 +155,7 @@ function matrix(m, n, initial) {
          ********************************************************************/
         html_table: function(id, title) {
             var str = "<table><th>"+title+"</th>";
-            str += " <tbody id=\""+id+"body\">";
+            str += " <tbody class='matrix' id=\""+id+"body\">";
             for (i = 0; i < this.m; ++i) {
                 str += "<tr>";
                 for (j = 0; j < this.n; ++j) {
@@ -204,7 +192,7 @@ function matrix(m, n, initial) {
             var A = newmat.data;
             var rows = A.length;
             var columns = A[0].length;
-            
+
             var lead = 0;
             for (var k = 0; k < rows; k++) {
                 if (columns <= lead){ return; }
@@ -220,10 +208,10 @@ function matrix(m, n, initial) {
                 }
                 var irow = A[i], krow = A[k];
                 A[i] = krow, A[k] = irow;
-                 
+
                 var val = A[k][lead];
                 for (var j = 0; j < columns; j++) { A[k][j] /= val; }
-                 
+
                 for (var i = 0; i < rows; i++) {
                     if (i === k) continue;
                     val = A[i][lead];
@@ -255,7 +243,7 @@ function ludcmp(mat) {
         indx: [],                           // Stores the permutation
         d: 0.0,                             // Used by det
 
-        init: function() {
+        init: function(mat) {
             this.n = this.lu.m;
             this.indx = this.n;
             var tiny = 1.0e-40,             // A small number
@@ -264,7 +252,7 @@ function ludcmp(mat) {
                 temp = 0,
                 vv = [];
             this.d = 1.0;
-           
+
             for (var i = 0; i < this.n; ++i) {
                 big = 0.0;
                 for (var j = 0; j < this.n; ++j) {
@@ -293,7 +281,7 @@ function ludcmp(mat) {
                     vv[imax] = vv[k];
                 }
                 indx[k] = imax;
-                
+
                 if (this.lu[k][k] === 0.0) this.lu[k][k] = tiny;
 
                 for (var i = k+1; i < this.n; ++i) {
@@ -311,84 +299,14 @@ function ludcmp(mat) {
     }
 }
 
-
-/*****************************************************************************
- **************************** BEGIN TESTS ************************************
- * When you need to test a function just add a new function called
- * test_[yourfunction] then call it in the test function at the bottom.
- * This allows us to test quickly without using the browser.
- ****************************************************************************/
-function test_equals() {
-    a1 = [[1, 2],
-          [3, 4]];
-    a2 = [[1, 2, 0], 
-          [3, 4, 1],
-          [0, 2, 4]];
+function test() {
+    a1 = [[1, 0, 2],
+          [2, 4, 1],
+          [5, 4, 2]];
     m1 = matrix();
-    m1.fromarray(a1);
-
-    m2 = matrix();
-    m2.fromarray(a1);
-
-    m3 = matrix();
-    m3.init(3, 3, 0);
-
-    m4 = matrix();
-    m4.init(a2);
-
-    console.log("Test equals matrix works correctly: " + m1.equals(m2));
-    console.log("Test unequal matrix works correctly: " + !m1.equals(m3));
-    console.log("Test equal with wrong dimensions works correctly: " + !m1.equals(m4));
-}
-
-function test_within_bounds() {
-    var a1 = [[1, 2],
-          [3, 4]];
-    var m = matrix();
-    m.fromarray(a1);
-
-    console.log("Test within bounds works correctly: " + m.within_bounds(0,0));
-    console.log("Test outside bounds works correctly: " + m.within_bounds(2,2));
-}
-
-function test_copy_by_value() {
-    var a1 = [[1, 2],
-          [3, 4]];
-    var orig = matrix();
-    orig.fromarray(a1);
-    var dup = orig.copy();
-    dup.set(1, 1, 0);
-    console.log("Copy didn't change original: " + !orig.equals(dup));
-    orig.print();
-    dup.print();
-}
-
-function test_fromarray() {
-    a1 = [[4, 3],
-          [6, 3]];
-    m1 = matrix();
-    console.log("Matrix fromarry: ");
     m1.fromarray(a1);
     m1.print();
-}
-
-function test_ludcmp() {
-    a1 = [[4, 3],
-          [6, 3]];
-    m1 = matrix();
-    m1.fromarray(a1);
     lud = ludcmp(m1);
-    console.log("LUD matrix: ");
     lud.lu.print();
-    console.log("LUD permutation: "+lud.d);
-}
-
-/* Driver for all the tests */
-function test() {
-    test_equals();
-    test_fromarray();
-    test_within_bounds();
-    test_copy_by_value();
-    test_ludcmp();
 }
 test();
