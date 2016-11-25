@@ -41,8 +41,24 @@ function matrix(m, n, initial) {
             var m = matrix();
             m.m = this.m;
             m.n = this.n;
-            m.data = this.data;
+            for (var i = 0; i < this.m; ++i) {
+                var row = this.data[i].slice(0);
+                m.data[i] = row;
+            }
+            //m.data = this.data.slice(0, -1);
             return m;
+        },
+
+        /*********************************************************************
+         * Create a matrix from an array of arrays.
+         ********************************************************************/
+        fromarray: function(arr) {
+            this.m = arr.length;
+            this.n = arr[0].length;
+            for (var i = 0; i < this.m; ++i) {
+                var row = arr[i].slice(0);
+                this.data[i] = row;
+            }
         },
 
         /*********************************************************************
@@ -284,3 +300,15 @@ function ludcmp(mat) {
         solve: function() {},
     }
 }
+
+function test() {
+    a1 = [[1, 0, 2],
+          [2, 4, 1],
+          [5, 4, 2]];
+    m1 = matrix();
+    m1.fromarray(a1);
+    m1.print();
+    lud = ludcmp(m1);
+    lud.lu.print();
+}
+test();
