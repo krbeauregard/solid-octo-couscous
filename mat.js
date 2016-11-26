@@ -325,7 +325,7 @@ function ludcmp(mat) {
             for (var i = 0; i < this.n; ++i) {
                 dd = dd * this.lu.get(i, i);
             }
-            return dd;
+            return (Math.round(100*dd)) / 100;
         },
 
         /*********************************************************************
