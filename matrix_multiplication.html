@@ -106,7 +106,7 @@
 
 				<div class="input-group">
 					<span class="input-group-addon">
-						<button type='button' class="btn btn-secondary" onclick="multiply_matrix(matA, matB)">Multiply</button>
+						<button id = 'multiply_button' type='button' class="btn" >Multiply</button>
 					</span>
 					<span class="input-group-addon">
 						<button type='button' class="btn btn-secondary" onclick="step(matA, matB, matC)">Next Step</button>
@@ -152,11 +152,12 @@
 var create_matrix_button = document.getElementById("create_matrix_button");
 var multiply_button = document.getElementById("multiply_button");
 
+var ai = document.getElementById('rowsA').value;
+var aj = document.getElementById('colsA').value;
+var bi = document.getElementById('rowsB').value;
+var bj = document.getElementById('colsB').value;
+
 create_matrix_button.addEventListener("click", function(e) {
-  var ai = document.getElementById('rowsA').value;
-  var aj = document.getElementById('colsA').value;
-  var bi = document.getElementById('rowsB').value;
-  var bj = document.getElementById('colsB').value;
   m = matrix();
   m.random_int_mat(ai, aj,0,9);
   n = matrix();
@@ -166,6 +167,12 @@ create_matrix_button.addEventListener("click", function(e) {
   m.print();
   n.print();
   console.log("Howdy! ", e);
+}, false);
+
+multiply_button.addEventListener('click', function(e){
+  m = matrix();
+  m.from_html_table('mat0body');
+  console.log('aloha', m);
 }, false);
 
 </script>

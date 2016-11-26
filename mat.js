@@ -131,17 +131,19 @@ function matrix(m, n, initial) {
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
+
             var nrows = document.getElementById(id).rows.length;
             var ncols = document.getElementById(id).rows[0].cells.length;
             console.log("nrows: "+nrows+"ncols"+ncols);
-            var mat = matrix();
-            mat.init(nrows, ncols, 0);
+            this.init(nrows, ncols,0);
+            // var mat = matrix();
+            // mat.init(nrows, ncols, 0);
             for (r = 0; r < nrows; ++r) {
                 for (c = 0; c < ncols; ++c) {
-                    mat.set(r, c, document.getElementById("A"+r+""+c).innerHTML);
+                    this.set(r, c, document.getElementById("A"+r+""+c).innerHTML);
                 }
             }
-            return mat;
+            // return mat;
         },
 
         /*********************************************************************
@@ -251,7 +253,7 @@ function ludcmp(mat) {
                 big = 0,
                 temp = 0,
                 vv = [];
-            
+
             this.d = 1.0;
 
             for (var i = 0; i < this.n; ++i) {
@@ -284,7 +286,7 @@ function ludcmp(mat) {
                 }
                 this.indx[k] = imax;
                 console.log("index: " + this.indx[k]);
-                
+
                 if (this.lu.get(k, k) === 0.0) this.lu.set(k, k, tiny);
 
                 for (var i = k+1; i < this.n; ++i) {
@@ -310,6 +312,11 @@ function ludcmp(mat) {
     }
 }
 
+function multiply(matA, matB){
+  console.log('hello');
+  console.log(ai,aj);
+}
+
 /*****************************************************************************
  **************************** BEGIN TESTS ************************************
  * When you need to test a function just add a new function called
@@ -319,7 +326,7 @@ function ludcmp(mat) {
 function test_equals() {
     a1 = [[1, 2],
           [3, 4]];
-    a2 = [[1, 2, 0], 
+    a2 = [[1, 2, 0],
           [3, 4, 1],
           [0, 2, 4]];
     m1 = matrix();
