@@ -146,12 +146,13 @@ function matrix(m, n, initial) {
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
+            id += "body";
             var nrows = document.getElementById(id).rows.length;
             var ncols = document.getElementById(id).rows[0].cells.length;
             this.init(nrows, ncols,0);
             for (r = 0; r < nrows; ++r) {
                 for (c = 0; c < ncols; ++c) {
-                    this.set(r, c, document.getElementById("A"+r+""+c).innerHTML);
+                    this.set(r, c, document.getElementById(id+r+""+c).innerHTML);
                 }
             }
             // return mat;
@@ -172,7 +173,7 @@ function matrix(m, n, initial) {
             for (i = 0; i < this.m; ++i) {
                 str += "<tr>";
                 for (j = 0; j < this.n; ++j) {
-                    var elemid = "A"+i+""+j;
+                    var elemid = id+"body"+i+""+j;
                     var rounded = Math.round(100*this.get(i, j))/ 100;
                     str += "<td id="+elemid+">"+rounded+"</td>";
                 }
