@@ -94,11 +94,11 @@ function matrix(m, n, initial) {
          * Check whether m and n are within the bounds of the matrix.
          ********************************************************************/
         within_bounds: function(m ,n) {
-            if (m > this.m || m < 0) {
+            if (m > (this.m-1) || m < 0) {
                 console.log("Error: trying to access outside the range of matrix row.");
                 return false;
             }
-            if (n > this.n) {
+            if (n > this.n || n < 0) {
                 console.log("Error: Trying to access outside range of matrix row.");
                 return false;
             }
@@ -118,6 +118,7 @@ function matrix(m, n, initial) {
          * Set Matrix[m][n] to value.
          ********************************************************************/
         set: function(m, n, val) {
+            console.log("m: "+m+" n: "+n+" val: "+val);
             if (this.within_bounds(m, n)) this.data[m][n] = val;
         },
 
@@ -295,22 +296,25 @@ function ludcmp(mat) {
                 }
                 /* Do we need to interchange rows? */
                 if (k !== imax) {
+                    /* Yes, do so.. */
                     for (var j = 0; j < this.n; ++j) {
                         temp = this.lu.get(imax, j);
                         this.lu.set(imax, j, this.lu.get(k, j));
                         this.lu.set(k, j, temp);
                     }
-                    this.d = (-1) * this.d;
-                    vv[imax] = vv[k];
+                    this.d = (-1) * this.d; // and change the parity of d:w
+                    vv[imax] = vv[k];       // and interchange the scale factor
                 }
                 this.indx[k] = imax;
                 
                 if (this.lu.get(k, k) === 0.0) this.lu.set(k, k, tiny);
 
                 for (var i = k+1; i < this.n; ++i) {
+                    /* Divide by the pivot element. */
                     temp = this.lu.get(i, k) / this.lu.get(k, k);
                     this.lu.set(i,k,this.lu.get(i,k)/this.lu.get(k,k));
 
+                    /* Innermost loop reduce remaining submatrix */
                     for (j = k+1; j < this.n; ++j) {
                         this.lu.set(i,j, this.lu.get(i,j) - temp*this.lu.get(k,j));
                     }
@@ -326,8 +330,66 @@ function ludcmp(mat) {
             return dd;
         },
 
-        solve: function() {},
-        inv: function() {},
+        /*********************************************************************
+         * Solve the set n of linear equations A.x = b using the stored LU
+         * decomposition of A.
+         ********************************************************************/
+        solve: function(b) {
+            var ii = 0;
+            var sum = 0;
+            var n = this.n;
+            var x = [];
+            if (b.length !== this.n) {
+                console.log("Error: lucdmp.solve bad sizes()");
+                return;
+            }
+            for (var i = 0; i < n; ++i) x[i] = b[i];
+            for (var i = 0; i < n; ++i) {
+                var ip = indx[i];
+                sum = x[ip];
+                x[ip] = x[i];
+                if (ii != 0)
+                    for (var j = ii-1; j < i; ++j) sum -= this.lu.get(i,j)*x[j];
+                else if (sum !== 0.0) ii = i+1;
+                x[i] = sum;
+            }
+            for (var i = n-1; i >= 0; --i) {
+                sum = x[i]; 
+                for (var j = 0; j < n; ++j) sum -= this.lu.get(i,j)*x[j];
+                x[i] = sum / this.lu.get(i,i);
+            }
+            return xx;
+        },
+
+        solvemn: function(b) {
+            var m = b.n;
+            var n = this.n;
+            var x = matrix();
+            x.init(b.m, b.n, 0);
+            if (b.m !== n) {
+                console.log("Error: ludcmp.solve bad sizes");
+                return;
+            }
+            var xx = [];
+            for (var j = 0; j < n; ++j) {
+                for (var i = 0; i < n; ++i) xx[i] = b.get(i, j);
+                xx = this.solve(xx);
+                for (var i = 0; i < n; ++i) x.set(i, j, xx[i]);
+            }
+            return x;
+        },
+
+        inv: function() {
+            var ainv = matrix();
+            ainv.init(this.m, this.n, 0);
+            for (var i = 0; i < this.n; ++i) {
+                for (var j = 0; j < this.n; ++j) {
+                    ainv.set(i, i, 1);
+                }
+            }
+            this.solvemn(ainv);
+            return ainv;
+        },
     }
 }
 
@@ -417,13 +479,25 @@ function test_det() {
     console.log("Determinant: ", lud.det());
 }
 
+function test_inverse() {
+    a1 = [[4, 7],
+          [2, 6]];
+    mat = matrix();
+    mat.fromarray(a1);
+    lud = ludcmp(mat);
+    lud.init(mat);
+    inv = lud.inv();
+    inv.print();
+}
+
 /* Driver for all the tests */
 function test() {
-    test_equals();
-    test_fromarray();
-    test_within_bounds();
-    test_copy_by_value();
-    test_ludcmp();
-    test_det();
+    //test_equals();
+    //test_fromarray();
+    //test_within_bounds();
+    //test_copy_by_value();
+    //test_ludcmp();
+    //test_det();
+    test_inverse();
 }
 test();
