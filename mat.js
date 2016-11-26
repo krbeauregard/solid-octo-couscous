@@ -144,7 +144,11 @@ function matrix(m, n, initial) {
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
+<<<<<<< HEAD
 
+=======
+            id += "body";
+>>>>>>> e45d3e9814750d776dc3fe0d7718f4e6ebae0515
             var nrows = document.getElementById(id).rows.length;
             var ncols = document.getElementById(id).rows[0].cells.length;
             console.log(id+"nrows: "+nrows+"ncols"+ncols);
@@ -174,7 +178,11 @@ function matrix(m, n, initial) {
             for (i = 0; i < this.m; ++i) {
                 str += "<tr>";
                 for (j = 0; j < this.n; ++j) {
+<<<<<<< HEAD
                     var elemid = id+i+""+j;
+=======
+                    var elemid = id+"body"+i+""+j;
+>>>>>>> e45d3e9814750d776dc3fe0d7718f4e6ebae0515
                     var rounded = Math.round(100*this.get(i, j))/ 100;
                     str += "<td id="+elemid+">"+rounded+"</td>";
                 }
