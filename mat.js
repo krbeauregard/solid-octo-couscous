@@ -118,7 +118,6 @@ function matrix(m, n, initial) {
          * Set Matrix[m][n] to value.
          ********************************************************************/
         set: function(m, n, val) {
-            console.log("m: "+m+" n: "+n+" val: "+val);
             if (this.within_bounds(m, n)) this.data[m][n] = val;
         },
 
@@ -307,7 +306,6 @@ function ludcmp(mat) {
                     vv[imax] = vv[k];       // and interchange the scale factor
                 }
                 this.indx[k] = imax;
-                console.log("index: " + this.indx[k]);
 
                 if (this.lu.get(k, k) === 0.0) this.lu.set(k, k, tiny);
 
@@ -347,7 +345,7 @@ function ludcmp(mat) {
             }
             for (var i = 0; i < n; ++i) x[i] = b[i];
             for (var i = 0; i < n; ++i) {
-                var ip = indx[i];
+                var ip = this.indx[i];
                 sum = x[ip];
                 x[ip] = x[i];
                 if (ii != 0)
@@ -357,10 +355,10 @@ function ludcmp(mat) {
             }
             for (var i = n-1; i >= 0; --i) {
                 sum = x[i]; 
-                for (var j = 0; j < n; ++j) sum -= this.lu.get(i,j)*x[j];
+                for (var j = i+1; j < n; ++j) sum -= this.lu.get(i,j)*x[j];
                 x[i] = sum / this.lu.get(i,i);
             }
-            return xx;
+            return x;
         },
 
         solvemn: function(b) {
@@ -383,13 +381,14 @@ function ludcmp(mat) {
 
         inv: function() {
             var ainv = matrix();
-            ainv.init(this.m, this.n, 0);
-            for (var i = 0; i < this.n; ++i) {
-                for (var j = 0; j < this.n; ++j) {
+            ainv.init(this.lu.m, this.lu.n, 0);
+            ainv.print();
+            for (var i = 0; i < this.lu.n; ++i) {
+                for (var j = 0; j < this.lu.n; ++j) {
                     ainv.set(i, i, 1);
                 }
             }
-            this.solvemn(ainv);
+            ainv = this.solvemn(ainv);
             return ainv;
         },
     }
@@ -493,7 +492,7 @@ function test_inverse() {
     mat.fromarray(a1);
     lud = ludcmp(mat);
     lud.init(mat);
-    inv = lud.inv();
+    var inv = lud.inv();
     inv.print();
 }
 
