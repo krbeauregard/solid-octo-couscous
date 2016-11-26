@@ -37,8 +37,8 @@
 
 <!--_____________________________Matrix 0__________________________________-->
           <table class="table table-sm" id="mat0">
-            <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
-            <tbody class="matrix">&nbsp;</tbody>
+            <!-- <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
+            <tbody class="matrix">&nbsp;</tbody> -->
           </table>
 
           <div class="input-group">
@@ -67,8 +67,8 @@
 <!--_____________________________Matrix 1__________________________________-->
 				<div class="col-md-3">
 					<table id="mat1" class="table table-sm">
-						<thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
-						<tbody class="matrix">&nbsp;</tbody>
+						<!-- <thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
+						<tbody class="matrix">&nbsp;</tbody> -->
 					</table>
 
 					<div class="input-group">
@@ -97,14 +97,17 @@
 				</div> <!-- end col-md-4 -->
 
 <!--_____________________________Matrix C__________________________________-->
-				<div style="margin-top:20px" class="col-md-3">
-					<table class="table table-sm">
-						<thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
-						<tbody id='matC' class="matrix"></tbody>
+				<div class="col-md-3">
+					<table id='matC' class="table table-sm">
+						<!-- <thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
+						<tbody id='matC' class="matrix"></tbody> -->
 					</table>
 				</div><!-- end column for matrix C -->
 
 				<div class="input-group">
+          <span class="input-group-addon">
+            <button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
+          </span>
 					<span class="input-group-addon">
 						<button id = 'multiply_button' type='button' class="btn" >Multiply</button>
 					</span>
@@ -113,9 +116,6 @@
 					</span>
 					<span class="input-group-addon">
 						<button type='submit' class="btn btn-secondary">Reset Page</button>
-					</span>
-					<span class="input-group-addon">
-						<button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
 					</span>
 				</div> <!-- end dimension input row-->
 
@@ -183,23 +183,9 @@ multiply_button.addEventListener('click', function(e){
   m.print();
   n.print();
   p = multiply(m,n);
-  // p = matrix();
-  // p.init(arow, bcol, 0);
-  // p.print();
-  // for (var i = 0; i < arow; ++i){
-  //   for (var j = 0; j < bcol; ++j){
-  //     total = 0;
-  //     for (var k = 0; k < acol; ++k){
-  //       total += m.get(i,k)*n.get(k,j);
-  //       // console.log(m.get(i,k), n.get(k,j), total);
-  //     }
-  //     p.set(i,j,total);
-  //   }
-  // }
-  // p.tobrowser('matC', '');
   console.log('aloha', m,n);
   p.print();
-  p.tobrowser('matC','');
+  p.tobrowser('matC','Matrix C');
 }, false);
 
 </script>
