@@ -147,21 +147,22 @@
 
   </div>
 </div> <!-- end of container -->
+
 <script>
 
 var create_matrix_button = document.getElementById("create_matrix_button");
 var multiply_button = document.getElementById("multiply_button");
 
-var ai = document.getElementById('rowsA').value;
-var aj = document.getElementById('colsA').value;
-var bi = document.getElementById('rowsB').value;
-var bj = document.getElementById('colsB').value;
 
 create_matrix_button.addEventListener("click", function(e) {
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  var brow = document.getElementById('rowsB').value;
+  var bcol = document.getElementById('colsB').value;
   m = matrix();
-  m.random_int_mat(ai, aj,0,9);
+  m.random_int_mat(arow, acol,0,9);
   n = matrix();
-  n.random_int_mat(bi, bj,0,9);
+  n.random_int_mat(brow, bcol,0,9);
   m.tobrowser("mat0", "Matrix A");
   n.tobrowser("mat1", "Matrix B");
   m.print();
@@ -170,9 +171,32 @@ create_matrix_button.addEventListener("click", function(e) {
 }, false);
 
 multiply_button.addEventListener('click', function(e){
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  var brow = document.getElementById('rowsB').value;
+  var bcol = document.getElementById('colsB').value;
+  var total = 0;
   m = matrix();
   m.from_html_table('mat0body');
-  console.log('aloha', m);
+  n = matrix();
+  n.from_html_table('mat1body');
+  m.print();
+  n.print();
+  p = matrix();
+  p.init(arow, bcol, 0);
+  p.print();
+  for (var i = 0; i < arow; ++i){
+    for (var j = 0; j < bcol; ++j){
+      total = 0;
+      for (var k = 0; k < acol; ++k){
+        total += m.get(i,k)*n.get(k,j);
+        console.log(m.get(i,k), n.get(k,j), total);
+      }
+      p.set(i,j,total);
+    }
+  }
+  p.tobrowser('matC', '');
+  console.log('aloha',p);
 }, false);
 
 </script>
