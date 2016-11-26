@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Begin Header -->
+<head>
+  <title class="highlight">Linear Algebra in a Browser</title>
+  <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link href="themes/prism.css" rel="stylesheet" />
+</head>
+<!-- End Header -->
+
+<!-- Begin Body -->
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand">Visualize Linear Algebra</a>
+        <ul class="nav navbar-nav nav-pills" role="tablist">
+          <li><a href="home.html">Home</a></li>
+          <li class="active"><a href="matrix_multiplication.html">Multiplication</a></li>
+          <li><a href="rref.html">RREF</a></li>
+          <li><a href="inverse.html">Inverse</a></li>
+          <li><a href="determinant.html">Determinant</a></li>
+          <li><a href="eigen.html">Eigen-@#$*</a></li>
+        </ul> <!-- end main menu -->
+      </div> <!-- end navbar container -->
+    </nav>
+    <h1  class='text-center '>Matrix Multiplication</h1>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+<!--_____________________________Matrix 0__________________________________-->
+          <table class="table table-sm" id="mat0">
+            <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
+            <tbody class="matrix">&nbsp;</tbody>
+          </table>
+
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input class="cols-md-1 form-control"
+                     id="rowsA"
+                     type="number"
+                     aria-label="input for rowsA"
+                     value="4"
+                     min="1"
+										 placeholder="rows">
+            </span>
+
+            <span class="input-group-addon">
+              <input class="col-xs-1 form-control"
+                     id="colsA"
+                     type="number"
+                     value="4"
+                     min="1"
+                     aria-label="input for colsA"
+										 placeholder="cols">
+            </span>
+          </div><!-- end the input group -->
+        </div> <!--end col-md-4 -->
+
+<!--_____________________________Matrix 1__________________________________-->
+				<div class="col-md-3">
+					<table id="mat1" class="table table-sm">
+						<thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
+						<tbody class="matrix">&nbsp;</tbody>
+					</table>
+
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input class="col-xs-1 form-control"
+										 id="rowsB"
+										 type="number"
+										 aria-label="input for rowsB"
+                     value="4"
+                     min="1"
+										 placeholder="rows">
+						</span>
+
+						<span class="input-group-addon">
+							<input class="col-xs-1 form-control"
+										 id="colsB"
+										 type="number"
+										 aria-label="input for colsB"
+                     value="4"
+                     min="1"
+										 placeholder="cols">
+						</span>
+
+
+					</div><!-- end the input group -->
+				</div> <!-- end col-md-4 -->
+
+<!--_____________________________Matrix C__________________________________-->
+				<div style="margin-top:20px" class="col-md-3">
+					<table class="table table-sm">
+						<thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
+						<tbody id='matC' class="matrix"></tbody>
+					</table>
+				</div><!-- end column for matrix C -->
+
+				<div class="input-group">
+					<span class="input-group-addon">
+						<button id = 'multiply_button' type='button' class="btn" >Multiply</button>
+					</span>
+					<span class="input-group-addon">
+						<button type='button' class="btn btn-secondary" onclick="step(matA, matB, matC)">Next Step</button>
+					</span>
+					<span class="input-group-addon">
+						<button type='submit' class="btn btn-secondary">Reset Page</button>
+					</span>
+					<span class="input-group-addon">
+						<button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
+					</span>
+				</div> <!-- end dimension input row-->
+
+
+      <div style="display:table-cell; padding:25px;">
+        <p id='cellA'></p>
+        <p id='cellB'></p>
+        <p id='cellC'></p>
+      </div>
+
+      <table>
+        <tbody>
+          <tr><td id='istep'><td id='jstep'><td id='kstep'>
+        </tbody>
+      </table>
+
+    </div>
+
+    <pre>
+      <code class="language-python">
+            <p>for i in range(len(matrixA)):<br>
+            &emsp;for j in range(len(matrixB[0]])):<br>
+            &emsp;&emsp;total = 0<br>
+            &emsp;&emsp;for k in range(len(matrixB)):<br>
+            &emsp;&emsp;&emsp;total += matrixA[i][k]*matrixB[k][j]<br>
+            &emsp;matrixC[i][j] = s</p>
+        </code>
+    </pre><!-- end code -->
+
+  </div>
+</div> <!-- end of container -->
+
+<script>
+
+var create_matrix_button = document.getElementById("create_matrix_button");
+var multiply_button = document.getElementById("multiply_button");
+
+
+create_matrix_button.addEventListener("click", function(e) {
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  var brow = document.getElementById('rowsB').value;
+  var bcol = document.getElementById('colsB').value;
+  m = matrix();
+  m.random_int_mat(arow, acol,0,9);
+  n = matrix();
+  n.random_int_mat(brow, bcol,0,9);
+  m.tobrowser("mat0", "Matrix A");
+  n.tobrowser("mat1", "Matrix B");
+  m.print();
+  n.print();
+  console.log("Howdy! ", e);
+}, false);
+
+multiply_button.addEventListener('click', function(e){
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  var brow = document.getElementById('rowsB').value;
+  var bcol = document.getElementById('colsB').value;
+  var total = 0;
+  m = matrix();
+  m.from_html_table('mat0body');
+  n = matrix();
+  n.from_html_table('mat1body');
+  m.print();
+  n.print();
+  // p = matrix();
+  // p.init(arow, bcol, 0);
+  // p.print();
+  // for (var i = 0; i < arow; ++i){
+  //   for (var j = 0; j < bcol; ++j){
+  //     total = 0;
+  //     for (var k = 0; k < acol; ++k){
+  //       total += m.get(i,k)*n.get(k,j);
+  //       // console.log(m.get(i,k), n.get(k,j), total);
+  //     }
+  //     p.set(i,j,total);
+  //   }
+  // }
+  // p.tobrowser('matC', '');
+  console.log('aloha',p);
+}, false);
+
+</script>
+</body>
+
+<!-- Begin Javascript -->
+<script src="themes/prism.js"></script>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src='mat.js'></script>
+<!-- End Javascript -->

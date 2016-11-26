@@ -31,6 +31,25 @@
 
 
 <div class="container-fluid" style="padding:75px; width:1000px">
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="matrix" id="original">
+      </div><!-- end original matrix -->
+      <button id="generate_btn" class="btn" type="button">Generate</button>
+    </div><!-- end col-md-4 -->
+
+    <div class="col-md-4">
+      <div class="matrix">
+        <button>Right</button>
+      </div><!-- end inverse matrix -->
+    </div><!-- end col-md-4 -->
+
+  </div><!-- end row -->
+
+
+
   <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -41,5 +60,18 @@
 </div>
 
 </body>
+<!-- Begin callback functions -->
+<script src="mat.js"></script>
+<script>
+generate_button = document.getElementById("generate_btn");
+generate_button.addEventListener('click', function(e) {
+  console.log("e: " + e);
+  var mat = matrix();
+  mat.random_int_mat(3, 3, 0, 9);
+  mat.print();
+  console.log("Hey there...");
+  mat.tobrowser("original");
+}, false);
+</script>
 <!-- End Body -->
 </html>
