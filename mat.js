@@ -181,7 +181,7 @@ function matrix(m, n, initial) {
                 str += "</tr>";
             }
             str += "</tbody></table>";
-            console.log(str);
+            // console.log(str);
             return str;
         },
 
@@ -393,9 +393,12 @@ function ludcmp(mat) {
         },
     }
 }
+/*****************************************************************************
+ * Multiply Function
+ *****************************************************************************/
 
 function multiply(matA, matB){
-  console.log('hello');
+  console.log('-hello-');
   var mA = matA;
   var mB = matB;
   var mC = matrix();
@@ -415,6 +418,39 @@ function multiply(matA, matB){
   }
   mC.print();
   return(mC);
+}
+/*****************************************************************************
+ * Highlighting function that demonstrates process of matrix multiplication
+ * Pretty much lifted from the previous implementation
+ *****************************************************************************/
+var i_step = -1;
+var j_step = -1;
+var k_step = 0;
+var i_last = 0;
+var j_last = 0;
+var k_last = 0;
+var axb = 0;
+var sum = 0;
+
+function step(matA, matB, matC){
+  console.log('---');
+  var mA = matA;
+  var mB = matB;
+  var mC = matC;
+  var cellAIK = '';
+  var cellBKJ = '';
+  var aik = '';
+  var bkj = '';
+  var cij = '';
+  console.log(mA);
+  console.log(mA.valueof(data[0]));
+  // var row = mA.data.length;
+  // var col = mB.data[0].length;
+  // var k = mA.data[0].length;
+  //
+  mC.print();
+  return;
+
 }
 
 /*****************************************************************************
@@ -524,4 +560,4 @@ function test() {
     test_det();
     test_inverse();
 }
-test();
+// test();
