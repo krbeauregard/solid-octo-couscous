@@ -30,58 +30,69 @@
   </nav>
   <h1  class='text-center '>RREF</h1>
 
-  <div class="container">
-  <form style="float:left; position:relative;margin:8px" class='form-horizontal'>
-    <div class='row'>
-      <div class='col-md-4'>
-        <h3>Matrix Dimensions</h3>
-        <div style='color:blue' class='form-group'>
-          <label class='control-label' for='rows'>Rows:</label>
-          <input style='width:60px' type='number' value='2' min='1' class='form-control' id='rows'>
-        </div>
-        <div style='color:green' class='form-group'>
-          <label class='control-label' for='cols'>Columns:</label>
-          <input style='width:60px' type='number' value='2' min='1' class='form-control' id='cols'>
-        </div>
-        <div>
-          <button type='button' class = 'btn' onclick="matrix(3,3,0)">Generate</button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <p id='matA'></p>
-    </div>
-  </form>
-<pre>
-  <code class="language-python">
-        <p>for i in range(len(matrixA)):<br>
-        &emsp;for j in range(len(matrixB[0]])):<br>
-        &emsp;&emsp;total = 0<br>
-        &emsp;&emsp;for k in range(len(matrixB)):<br>
-        &emsp;&emsp;&emsp;total += matrixA[i][k]*matrixB[k][j]<br>
-        &emsp;matrixC[i][j] = s</p>
-    </code>
-</pre>
+<div class="container-fluid" style="padding:75px; width:1000px">
+  <div class="row">
+
+    <div class="col-md-5">
+      <div id="original"></div><!-- end original matrix -->
+			<div class="input-group">
+				<span class="input-group-addon">
+					<input class="cols-md-1 form-control"
+								 id="rowsA"
+								 type="number"
+								 aria-label="input for rowsA"
+								 value="4"
+								 min="1"
+								 placeholder="rows">
+				</span>
+
+				<span class="input-group-addon">
+					<input class="col-xs-1 form-control"
+								 id="colsA"
+								 type="number"
+								 value="4"
+								 min="1"
+								 aria-label="input for colsA"
+								 placeholder="cols">
+				</span>
+				<span class="input-group-addon">
+					<button id="generate_btn" class="btn" type="button" aria-label="input for m">Generate</button>
+				</span>
+      <button id="rref_btn" class="btn" type="button">RREF</button>
+			</div><!-- end the input group -->
+    </div><!-- end col-md-4 -->
+
+    <div id="rref"></div><!-- end inverse matrix -->
 
 </div>
+
 </body>
-<!-- End Body -->
-<!-- </html> -->
-<!-- <script>
-window.onload = function() {
-  var A = [[2, 2, 5, 6],
-  [1, 1, -2, 2]];
+<script src="mat.js"></script>
+<script>
+generate_button = document.getElementById("generate_btn");
+generate_button.addEventListener('click', function(e) {
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  console.log("e: " + e);
+  var mat = matrix();
+  mat.random_int_mat(arow, acol, 0, 9);
+  mat.print();
+  mat.tobrowser("original", "original");
+}, false);
 
-  var B = [[1, 2],
-  [-1, 1],
-  [2, 2],
-  [0, 2]]
-  alert(rref(B));
-};
-</script> -->
+rref_button = document.getElementById("rref_btn");
+rref_button.addEventListener('click', function(e) {
+  var mat = matrix();
+  mat.from_html_table("original");
 
-<!-- Begin Javascript -->
-<script src="linear.js"></script>
+  var rref = matrix();
+  rref = mat.rref();
+  console.log("rref: " + rref);
+  rref.tobrowser("rref", "rref");
+
+}, false);
+</script>
+<script src="mat.js"></script>
 <!-- <script src='linear_math.js'></script> -->
 <script src="themes/prism.js"></script>
 <!-- End Javascript -->

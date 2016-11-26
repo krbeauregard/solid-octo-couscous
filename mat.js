@@ -205,6 +205,8 @@ function matrix(m, n, initial) {
          ********************************************************************/
         rref: function() {
             newmat = this.copy();
+            console.log("RREF:");
+            newmat.print();
             var A = newmat.data;
             var rows = A.length;
             var columns = A[0].length;
@@ -219,13 +221,24 @@ function matrix(m, n, initial) {
                     if (rows === i) {
                         i = k;
                         lead++;
-                        if (columns === lead) { return; }
+                        if (columns === lead) { 
+                            console.log("columns equals lead.");
+                        }
                     }
                 }
                 var irow = A[i], krow = A[k];
                 A[i] = krow, A[k] = irow;
 
                 var val = A[k][lead];
+
+                if (typeof val === 'undefined') {
+                    var tmp = A[k];
+                    A[k] = A[k+1];
+                    A[k+1] = tmp;
+                    console.log("cant' divide by zero");
+                    return this.rref();
+                }
+                console.log("val: " + val);
                 for (var j = 0; j < columns; j++) { A[k][j] /= val; }
 
                 for (var i = 0; i < rows; i++) {
@@ -233,6 +246,10 @@ function matrix(m, n, initial) {
                     val = A[i][lead];
                     for (var j = 0; j < columns; j++) {
                         A[i][j] -= val * A[k][j];
+                        if (isNaN(A[i][j])) {
+                            console.log("Found a NaN.");
+                            console.log("val: "+val+"    A["+k+"]["+j+"]="+A[i][j]);
+                        }
                     }
                 }
                 lead++;
@@ -417,6 +434,10 @@ function multiply(matA, matB){
   return(mC);
 }
 
+function get_td_by_id(id) {
+    return document.getElementById(id);
+}
+
 /*****************************************************************************
  **************************** BEGIN TESTS ************************************
  * When you need to test a function just add a new function called
@@ -477,6 +498,17 @@ function test_fromarray() {
     m1.print();
 }
 
+function test_rref() {
+    a1 = [[0, 1, 2],
+          [1, 2, 3],
+          [4, 5, 6]];
+    var m1 = matrix();
+    m1.fromarray(a1);
+    m1.print();
+    var rref = matrix();
+    rref = m1.rref();
+    rref.print();
+}
 function test_ludcmp() {
     a1 = [[2, 3, 2, 1],
           [4, 8, 7, 3],
@@ -516,12 +548,13 @@ function test_inverse() {
 
 /* Driver for all the tests */
 function test() {
-    test_equals();
-    test_fromarray();
-    test_within_bounds();
-    test_copy_by_value();
-    test_ludcmp();
-    test_det();
-    test_inverse();
+    //test_equals();
+    //test_fromarray();
+    //test_within_bounds();
+    //test_copy_by_value();
+    //test_ludcmp();
+    //test_det();
+    //test_inverse();
+    test_rref();
 }
-test();
+//test();
