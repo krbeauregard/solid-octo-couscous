@@ -30,15 +30,69 @@
 
 
 <div class="container-fluid" style="padding:75px; width:1000px">
-  <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+  <div class="row">
+
+    <div class="col-md-5">
+      <div id="original"></div><!-- end original matrix -->
+			<div class="input-group">
+				<span class="input-group-addon">
+					<input class="cols-md-1 form-control"
+								 id="rowsA"
+								 type="number"
+								 aria-label="input for rowsA"
+								 value="4"
+								 min="1"
+								 placeholder="rows">
+				</span>
+
+				<span class="input-group-addon">
+					<input class="col-xs-1 form-control"
+								 id="colsA"
+								 type="number"
+								 value="4"
+								 min="1"
+								 aria-label="input for colsA"
+								 placeholder="cols">
+				</span>
+				<span class="input-group-addon">
+					<button id="generate_btn" class="btn" type="button" aria-label="input for m">Generate</button>
+				</span>
+      <button id="determinant_btn" class="btn" type="button">Determinant</button>
+			</div><!-- end the input group -->
+    </div><!-- end col-md-4 -->
+
+    <div id="determinant"></div><!-- end inverse matrix -->
+
 </div>
 
 </body>
+<script src="mat.js"></script>
+<script>
+generate_button = document.getElementById("generate_btn");
+generate_button.addEventListener('click', function(e) {
+  var arow = document.getElementById('rowsA').value;
+  var acol = document.getElementById('colsA').value;
+  console.log("e: " + e);
+  var mat = matrix();
+  mat.random_int_mat(arow, acol, 0, 9);
+  mat.print();
+  mat.tobrowser("original", "original");
+}, false);
+
+determinant_button = document.getElementById("determinant_btn");
+determinant_button.addEventListener('click', function(e) {
+  var mat = matrix();
+  mat.from_html_table("original");
+
+  var lud = ludcmp(mat);
+  lud.init(mat);
+  var det = lud.det();
+  console.log("det: " + det);
+  var div = document.getElementById("determinant");
+  div.innerHTML = "<h1>"+det+"</div>";
+  //det.tobrowser("determinant", "determinant");
+
+}, false);
+</script>
 <!-- End Body -->
 </html>
