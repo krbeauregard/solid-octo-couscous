@@ -171,17 +171,22 @@ create_matrix_button.addEventListener("click", function(e) {
 }, false);
 
 multiply_button.addEventListener('click', function(e){
+  console.log("Mulitplying...");
   var arow = document.getElementById('rowsA').value;
   var acol = document.getElementById('colsA').value;
   var brow = document.getElementById('rowsB').value;
   var bcol = document.getElementById('colsB').value;
   var total = 0;
   m = matrix();
+  console.log("m: ");
   m.from_html_table('mat0body');
+  m.print();
+
   n = matrix();
   n.from_html_table('mat1body');
-  m.print();
+  console.log("n: ");
   n.print();
+
   p = matrix();
   p.init(arow, bcol, 0);
   p.print();

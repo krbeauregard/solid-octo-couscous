@@ -78,6 +78,7 @@ function matrix(m, n, initial) {
          * Print the matrix to the console
          ********************************************************************/
         print: function() {
+            console.log("printing");
             var str = "";
             for (i = 0; i < this.data.length; ++i) {
                 for (j = 0; j < this.data[i].length; ++j) {
@@ -134,6 +135,7 @@ function matrix(m, n, initial) {
                     this.set(i,j,val);
                 }
             }
+            this.print();
         },
 
         /*********************************************************************
@@ -144,13 +146,9 @@ function matrix(m, n, initial) {
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
-
             var nrows = document.getElementById(id).rows.length;
             var ncols = document.getElementById(id).rows[0].cells.length;
-            console.log("nrows: "+nrows+"ncols"+ncols);
             this.init(nrows, ncols,0);
-            // var mat = matrix();
-            // mat.init(nrows, ncols, 0);
             for (r = 0; r < nrows; ++r) {
                 for (c = 0; c < ncols; ++c) {
                     this.set(r, c, document.getElementById("A"+r+""+c).innerHTML);
@@ -181,13 +179,12 @@ function matrix(m, n, initial) {
                 str += "</tr>";
             }
             str += "</tbody></table>";
-            console.log(str);
             return str;
         },
 
         /*********************************************************************
-         * Given a table body id and the title of the table.
-         * Insert the table into the web page at id.
+         * Given a div id.
+         * Call html_table to create a table and insert it into the dom at id.
          *
          * This function uses html_table() to get the matrix data.
          ********************************************************************/
@@ -506,4 +503,4 @@ function test() {
     test_det();
     test_inverse();
 }
-test();
+//test();
