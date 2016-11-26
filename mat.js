@@ -94,11 +94,11 @@ function matrix(m, n, initial) {
          * Check whether m and n are within the bounds of the matrix.
          ********************************************************************/
         within_bounds: function(m ,n) {
-            if (m > (this.m-1) || m < 0) {
+            if (m >= this.m || m < 0) {
                 console.log("Error: trying to access outside the range of matrix row.");
                 return false;
             }
-            if (n > this.n || n < 0) {
+            if (n >= this.n || n < 0) {
                 console.log("Error: Trying to access outside range of matrix row.");
                 return false;
             }
@@ -499,12 +499,12 @@ function test_inverse() {
 
 /* Driver for all the tests */
 function test() {
-    //test_equals();
-    //test_fromarray();
-    //test_within_bounds();
-    //test_copy_by_value();
-    //test_ludcmp();
-    //test_det();
+    test_equals();
+    test_fromarray();
+    test_within_bounds();
+    test_copy_by_value();
+    test_ludcmp();
+    test_det();
     test_inverse();
 }
 test();
