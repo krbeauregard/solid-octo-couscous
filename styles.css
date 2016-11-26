@@ -18,13 +18,86 @@ body {
     background-color: white;
 }
 
+    table {
+      max-width: 100%;
+      background-color: transparent;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .table {
+      white-space: nowrap;
+    }
+
+    .table th,
+    .table td {
+      padding: 8px;
+      line-height: 20px;
+      text-align: center;
+      vertical-align: top;
+      border: 1px solid #dddddd;
+    }
+
+    .table th {
+      font-weight: bold;
+    }
+
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+
+.rowtitle {
+    float: left;
+    padding: 8px;
+    border-right: 0px;
+    height: 200px;
+}
+
+.rowtitle th, 
+.rowtitle td {
+    border-right: 0px;
+}
+
+.columntitle {
+    padding: 8px;
+    border-bottom: 0px;
+}
+
+.columntitle th, 
+.columntitle td {
+    border-bottom: 0px;
+}
+
+.tableparent {
+    width: 100%;
+}
 .table {
     table-layout: fixed;
 }
 
 .matrix {
+    border-collapse:collapse;
     position: relative;
 	overflow:scroll;
+}
+
+.matrix * {
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    margin: 0px;
+    padding:0px;
+}
+
+.matrix-content {
+    position: fixed;
+    left: 60px;
+    top: 59px;
+    width: 255px;
+    overflow-x:auto;
+    display: block;
 }
 
 .matrix:before, .matrix:after {

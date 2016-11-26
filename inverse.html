@@ -35,13 +35,13 @@
   <div class="row">
 
     <div class="col-md-4">
-      <div class="matrix" id="original">
+      <div id="original">
       </div><!-- end original matrix -->
       <button id="generate_btn" class="btn" type="button">Generate</button>
     </div><!-- end col-md-4 -->
 
     <div class="col-md-4">
-      <div class="matrix" id="inverse">
+      <div id="inverse">
       </div><!-- end inverse matrix -->
       <button id="inverse_btn" class="btn" type="button">Inverse</button>
     </div><!-- end col-md-4 -->
@@ -77,6 +77,7 @@ inverse_button = document.getElementById("inverse_btn");
 inverse_button.addEventListener('click', function(e) {
   var mat = matrix();
   mat.from_html_table("original");
+
   var lud = ludcmp(mat);
   lud.init(mat);
   var inv = lud.inv();
