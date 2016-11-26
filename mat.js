@@ -144,11 +144,7 @@ function matrix(m, n, initial) {
          * itself, otherwise the indexing will be all wack.
          ********************************************************************/
         from_html_table: function(id) {
-<<<<<<< HEAD
-
-=======
             id += "body";
->>>>>>> e45d3e9814750d776dc3fe0d7718f4e6ebae0515
             var nrows = document.getElementById(id).rows.length;
             var ncols = document.getElementById(id).rows[0].cells.length;
             console.log(id+"nrows: "+nrows+"ncols"+ncols);
@@ -178,11 +174,7 @@ function matrix(m, n, initial) {
             for (i = 0; i < this.m; ++i) {
                 str += "<tr>";
                 for (j = 0; j < this.n; ++j) {
-<<<<<<< HEAD
-                    var elemid = id+i+""+j;
-=======
                     var elemid = id+"body"+i+""+j;
->>>>>>> e45d3e9814750d776dc3fe0d7718f4e6ebae0515
                     var rounded = Math.round(100*this.get(i, j))/ 100;
                     str += "<td id="+elemid+">"+rounded+"</td>";
                 }
@@ -404,7 +396,25 @@ function ludcmp(mat) {
 
 function multiply(matA, matB){
   console.log('hello');
-  console.log(ai,aj);
+  var mA = matA;
+  var mB = matB;
+  var mC = matrix();
+  var rowsA = mA.data.length;
+  var colsB = mB.data[0].length;
+  var colsA = mA.data[0].length;
+  mC.init(rowsA, colsB, 0);
+  var total = 0;
+  for (var i = 0; i < rowsA; ++i){
+    for (var j = 0; j < colsB; ++j){
+      total = 0;
+      for (var k = 0; k < colsA; ++k){
+        total += mA.get(i,k)*mB.get(k,j);
+      }
+      mC.set(i,j,total);
+    }
+  }
+  mC.print();
+  return(mC);
 }
 
 /*****************************************************************************

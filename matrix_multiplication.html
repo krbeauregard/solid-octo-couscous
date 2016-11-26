@@ -177,11 +177,12 @@ multiply_button.addEventListener('click', function(e){
   var bcol = document.getElementById('colsB').value;
   var total = 0;
   m = matrix();
-  m.from_html_table('mat0body');
+  m.from_html_table('mat0');
   var n = matrix();
   n.from_html_table('mat1');
   m.print();
   n.print();
+  p = multiply(m,n);
   // p = matrix();
   // p.init(arow, bcol, 0);
   // p.print();
@@ -196,7 +197,9 @@ multiply_button.addEventListener('click', function(e){
   //   }
   // }
   // p.tobrowser('matC', '');
-  console.log('aloha',p);
+  console.log('aloha', m,n);
+  p.print();
+  p.tobrowser('matC','');
 }, false);
 
 </script>
