@@ -221,7 +221,7 @@ function matrix(m, n, initial) {
                     if (rows === i) {
                         i = k;
                         lead++;
-                        if (columns === lead) { 
+                        if (columns === lead) {
                             console.log("columns equals lead.");
                         }
                     }
@@ -593,8 +593,4 @@ function test() {
     //test_inverse();
     test_rref();
 }
-<<<<<<< HEAD
-// test();
-=======
 //test();
->>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
