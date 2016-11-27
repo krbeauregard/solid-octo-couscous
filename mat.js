@@ -298,29 +298,33 @@ var k_last = 0;
 var axb = 0;
 var sum = 0;
 
-function step(matA, matB, matC){
-  console.log('---');
-  var mA = matA;
-  var mB = matB;
-  var mC = matC;
-  var cellAIK = '';
-  var cellBKJ = '';
-  var aik = '';
-  var bkj = '';
-  var cij = '';
-  console.log(mA);
-  console.log(mA.valueof(data[0]));
-  // var row = mA.data.length;
-  // var col = mB.data[0].length;
-  // var k = mA.data[0].length;
-  //
-  mC.print();
-  return;
-
-}
+// function step(matA, matB, matC){
+//   console.log('---');
+//   var mA = matA;
+//   var mB = matB;
+//   var mC = matC;
+//   var cellAIK = '';
+//   var cellBKJ = '';
+//   var aik = '';
+//   var bkj = '';
+//   var cij = '';
+//   console.log(mA);
+//   console.log(get_td_by_id('mat0body00'));
+//   // var row = mA.data.length;
+//   // var col = mB.data[0].length;
+//   // var k = mA.data[0].length;
+//   //
+//   mC.print();
+//   return;
+//
+// }
 
 function get_td_by_id(id) {
     return document.getElementById(id);
+}
+
+function set_td_by_id(id, highlight){
+  document.getElementById(id).className = highlight;
 }
 
 /*****************************************************************************

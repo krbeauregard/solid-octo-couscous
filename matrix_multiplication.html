@@ -33,14 +33,9 @@
 
   <div class="container">
     <div class="row">
+      <!--_____________________________Matrix 0__________________________________-->
         <div class="col-md-3">
-
-<!--_____________________________Matrix 0__________________________________-->
-          <table class="table table-sm" id="mat0">
-            <!-- <thead class="thead-inverse"><tr><th>Matrix A</th></tr></thead>
-            <tbody class="matrix">&nbsp;</tbody> -->
-          </table>
-
+          <div id='mat0'></div>
           <div class="input-group">
             <span class="input-group-addon">
               <input class="cols-md-1 form-control"
@@ -62,15 +57,11 @@
 										 placeholder="cols">
             </span>
           </div><!-- end the input group -->
-        </div> <!--end col-md-4 -->
+        </div> <!--end col-md-3 -->
 
 <!--_____________________________Matrix 1__________________________________-->
 				<div class="col-md-3">
-					<table id="mat1" class="table table-sm">
-						<!-- <thead class="thead-inverse"><tr><th>Matrix B</th></tr></thead>
-						<tbody class="matrix">&nbsp;</tbody> -->
-					</table>
-
+          <div id='mat1'></div>
 					<div class="input-group">
 						<span class="input-group-addon">
 							<input class="col-xs-1 form-control"
@@ -94,31 +85,27 @@
 
 
 					</div><!-- end the input group -->
-				</div> <!-- end col-md-4 -->
+				</div> <!-- end col-md-3 -->
 
 <!--_____________________________Matrix C__________________________________-->
 				<div class="col-md-3">
-					<table id='matC' class="table table-sm">
-						<!-- <thead class="thead-inverse"><tr><th>Matrix C</th></tr></thead>
-						<tbody id='matC' class="matrix"></tbody> -->
-					</table>
-				</div><!-- end column for matrix C -->
-
-				<div class="input-group">
-          <span class="input-group-addon">
-            <button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
-          </span>
-					<span class="input-group-addon">
-						<button id = 'multiply_button' type='button' class="btn">Multiply</button>
-					</span>
-					<span class="input-group-addon">
-						<button id='step_button' type='button' class="btn">Next Step</button>
-					</span>
-					<!-- <span class="input-group-addon">
-						<button type='submit' class="btn btn-secondary">Reset Page</button>
-					</span> -->
-				</div> <!-- end dimension input row-->
-
+          <div id='matC'></div>
+  				<div class="input-group">
+            <span class="input-group-addon">
+              <button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
+            </span>
+  					<span class="input-group-addon">
+  						<button id = 'multiply_button' type='button' class="btn">Multiply</button>
+  					</span>
+  					<span class="input-group-addon">
+  						<button type='button' class="btn btn-default" onclick="step(mat0, mat1, matC)">Next Step</button>
+  					</span>
+  					<!-- <span class="input-group-addon">
+  						<button type='submit' class="btn btn-secondary">Reset Page</button>
+  					</span> -->
+  				</div> <!-- end dimension input row-->
+      </div>
+    </div>
 
       <div style="display:table-cell; padding:25px;">
         <p id='cellA'></p>
@@ -132,7 +119,6 @@
         </tbody>
       </table>
 
-    </div>
 
     <pre>
       <code class="language-python">
@@ -183,29 +169,82 @@ multiply_button.addEventListener('click', function(e){
   p.tobrowser('matC','Matrix C');
 }, false);
 
-// <<<<<<< HEAD
-// step_button.addEventListener('click', function(e){
-//   var m = matrix();
-//   m.from_html_table('mat0');
-//   var n = matrix();
-//   n.from_html_table('mat1');
-//   var p = matrix();
-//   p.from_html_table('matC');
-//   console.log('bleh');
-//   // p.print();
-//   // console.log(mat0.rows[1]);
-//   // console.log(m.html_table('mat0'));
-//   t = step(m,n,p);
-// }, false);
-// =======
-step_btn = document.getElementById('step_btn');
-step_btn.addEventListener('click', function(e) {
-  var id = 'mat0body00';
-  var val = get_td_value(id);
-  console.log(val);
-}, false);
+var i_step = -1;
+var j_step = -1;
+var k_step = 0;
+var i_last = 0;
+var j_last = 0;
+var k_last = 0;
 
-// >>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
+var axb = '';
+var sum = 0;
+function step(a, b, c){
+  var mat0 = a;
+  var mat1 = b;
+  var matC = c;
+  var cellAIK = '';
+  var cellBKJ = '';
+  var aik = '';
+  var bkj = '';
+  var cij = '';
+  var row = document.getElementById('rowsA').value;
+  var col = document.getElementById('colsB').value;
+  var k = document.getElementById('colsA').value;
+console.log(mat0body.rows[0].cells[0]);
+  if (i_step < row){
+    k_step = (k_step%k);
+    if (j_step == col){
+      j_step = j_step%col;
+    }
+    if (i_step >= 0){
+      document.getElementById('mat0body').rows[i_last].cells[k_last].className = 'highlight_none';
+    }
+    document.getElementById('kstep').innerHTML = 'k: '+(k_step+1) ;
+    if (j_step >= 0){
+      j_last > col ? j_last = col : j_last = j_step;
+      document.getElementById('mat1body').rows[k_last].cells[j_last].className = 'highlight_none';
+    }
+    if (k_step >=0){
+      document.getElementById('matCbody').rows[i_last].cells[j_last].className = 'highlight_none';
+    }
+    if (k_step%k == 0){
+      j_step = (j_step%col);
+      j_step++;
+      axb = '';
+      sum = 0;
+      // j_last > col ? j_last = col : j_last = j_step;
+      j_step = (j_step%col);
+
+      document.getElementById('jstep').innerHTML = 'j: '+(j_step+1);
+    }
+    if (j_step%col == 0 && k_step%k == 0){
+      i_step++;
+      document.getElementById('istep').innerHTML = 'i: '+(i_step+1);
+    }
+    document.getElementById('mat0body').rows[i_step].cells[k_step].className = 'highlight_y';
+    document.getElementById('mat1body').rows[k_step].cells[j_step].className = 'highlight_g';
+    document.getElementById('matCbody').rows[i_step].cells[j_step].className = 'highlight_b';
+    k_last > k ? k_last = k-1 : k_last = k_step;
+    k_step++;
+    cellAIK = document.getElementById('mat0body').rows[i_step].cells[(k_step)-1].innerHTML.substring(1,2);
+    cellBKJ = document.getElementById('mat1body').rows[(k_step)-1].cells[j_step].innerHTML.substring(1,2);
+    if (k_step >1 && k_step < col+1){
+      axb += '+'
+    }
+    axb += '('+cellAIK+'*'+cellBKJ+')'
+    sum += parseInt(cellAIK)*parseInt(cellBKJ);
+    aik += 'A('+(i_step+1)+','+k_step+')='+cellAIK;
+    bkj += 'B('+k_step+','+(j_step+1)+')='+cellBKJ;
+    cij += 'C('+(i_step+1)+','+(j_step+1)+')='+axb+'='+sum;
+    document.getElementById('cellA').innerHTML = aik;
+    document.getElementById('cellB').innerHTML = bkj;
+    document.getElementById('cellC').innerHTML = cij;
+
+  }
+  i_last = i_step;
+}
+
+
 </script>
 </body>
 
