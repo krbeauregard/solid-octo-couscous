@@ -71,6 +71,8 @@
 <script>
 generate_button = document.getElementById("generate_btn");
 generate_button.addEventListener('click', function(e) {
+  var det_div = document.getElementById('determinant');
+  det_div.innerHTML = '';
   var arow = document.getElementById('rowsA').value;
   var acol = document.getElementById('colsA').value;
   console.log("e: " + e);

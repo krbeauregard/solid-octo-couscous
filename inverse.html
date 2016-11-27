@@ -88,6 +88,8 @@ generate_button = document.getElementById("generate_btn");
 generate_button.addEventListener('click', function(e) {
   var arow = document.getElementById('rowsA').value;
   var acol = document.getElementById('colsA').value;
+  var inv_div = document.getElementById('inverse');
+  inv_div.innerHTML = '';
   console.log("e: " + e);
   var mat = matrix();
   mat.random_int_mat(arow, acol, 0, 9);
