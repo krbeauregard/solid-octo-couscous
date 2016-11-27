@@ -109,14 +109,18 @@
             <button id="create_matrix_button" class="btn" type="button" aria-label="input for m">Generate</button>
           </span>
 					<span class="input-group-addon">
-						<button id = 'multiply_button' type='button' class="btn" >Multiply</button>
+						<button id = 'multiply_button' type='button' class="btn">Multiply</button>
 					</span>
 					<span class="input-group-addon">
+<<<<<<< HEAD
+						<button id='step_button' type='button' class="btn">Next Step</button>
+=======
 						<button type='button' class="btn btn-secondary" id="step_btn">Next Step</button>
+>>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
 					</span>
-					<span class="input-group-addon">
+					<!-- <span class="input-group-addon">
 						<button type='submit' class="btn btn-secondary">Reset Page</button>
-					</span>
+					</span> -->
 				</div> <!-- end dimension input row-->
 
 
@@ -171,23 +175,33 @@ create_matrix_button.addEventListener("click", function(e) {
 }, false);
 
 multiply_button.addEventListener('click', function(e){
-  var arow = document.getElementById('rowsA').value;
-  var acol = document.getElementById('colsA').value;
-  var brow = document.getElementById('rowsB').value;
-  var bcol = document.getElementById('colsB').value;
-  var total = 0;
-  m = matrix();
+  var m = matrix();
   m.from_html_table('mat0');
   var n = matrix();
   n.from_html_table('mat1');
-  m.print();
-  n.print();
+  // m.print();
+  // n.print();
   p = multiply(m,n);
-  console.log('aloha', m,n);
-  p.print();
+  // console.log('aloha', m,n);
+  // p.print();
   p.tobrowser('matC','Matrix C');
 }, false);
 
+<<<<<<< HEAD
+step_button.addEventListener('click', function(e){
+  var m = matrix();
+  m.from_html_table('mat0');
+  var n = matrix();
+  n.from_html_table('mat1');
+  var p = matrix();
+  p.from_html_table('matC');
+  console.log('bleh');
+  // p.print();
+  // console.log(mat0.rows[1]);
+  // console.log(m.html_table('mat0'));
+  t = step(m,n,p);
+}, false);
+=======
 step_btn = document.getElementById('step_btn');
 step_btn.addEventListener('click', function(e) {
   var id = 'mat0body00';
@@ -195,6 +209,7 @@ step_btn.addEventListener('click', function(e) {
   console.log(val);
 }, false);
 
+>>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
 </script>
 </body>
 
