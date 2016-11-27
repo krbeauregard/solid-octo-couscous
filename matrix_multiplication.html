@@ -112,7 +112,11 @@
 						<button id = 'multiply_button' type='button' class="btn">Multiply</button>
 					</span>
 					<span class="input-group-addon">
+<<<<<<< HEAD
 						<button id='step_button' type='button' class="btn">Next Step</button>
+=======
+						<button type='button' class="btn btn-secondary" id="step_btn">Next Step</button>
+>>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
 					</span>
 					<!-- <span class="input-group-addon">
 						<button type='submit' class="btn btn-secondary">Reset Page</button>
@@ -183,6 +187,7 @@ multiply_button.addEventListener('click', function(e){
   p.tobrowser('matC','Matrix C');
 }, false);
 
+<<<<<<< HEAD
 step_button.addEventListener('click', function(e){
   var m = matrix();
   m.from_html_table('mat0');
@@ -196,6 +201,15 @@ step_button.addEventListener('click', function(e){
   // console.log(m.html_table('mat0'));
   t = step(m,n,p);
 }, false);
+=======
+step_btn = document.getElementById('step_btn');
+step_btn.addEventListener('click', function(e) {
+  var id = 'mat0body00';
+  var val = get_td_value(id);
+  console.log(val);
+}, false);
+
+>>>>>>> 46c7bdca381f6f95891a88adbcc07f34c57e88b3
 </script>
 </body>
 
