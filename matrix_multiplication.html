@@ -130,9 +130,34 @@
             &emsp;matrixC[i][j] = s</p>
         </code>
     </pre><!-- end code -->
-
-  </div>
-</div> <!-- end of container -->
+    <div style="padding:50px">
+    <h3 class='text-center'>The code block that started everything.</h3>
+    <p>I should make a few notes about Python programming. </p>
+      <p>A matrix declared in Python looks like this: <code class='language-python'>a = [[1,2,3,4],[3,4,5,6],[5,6,7,8]]
+</code></p><p>&emsp;Note the brackets. 'a' is a list of three things, and those three things
+ are lists of four things. This effectively gives us a 3-row x 4-column matrix.</p>
+      <p>In the first line: <code class='language-python'>
+        for i in range(len(matrixA))</code></p>
+        <p>&emsp;This gives us the range (0,3] because the list 'a' contains 3 elements and,
+        I don't care what mathematicians say, counting starts at 0. And we have
+      something called 'i' which keeps track of our progress through that range as we run this loop.</p>
+      <p>In the second line: <code class='language-python'>range(len(matrixB[0]))</code></p>
+      <p>&emsp;This gives the range (0,4] because we are asking for the length of the 0th element of the matrix
+        which, in our example, is a list containing four things.</p>
+        <p>The 5th line contains the <code class='language-python'>+=</code> operator and <code class='language-python'> x[y][z]</code> notation</p>
+        <p>&emsp;<code class='language-python'>a += b</code>&emsp; is the same as &emsp;<code class='language-python'>a = a+b</code></p>
+        <p>&emsp;The brackets, as a means of indexing, can be stacked so: <code class='language-python'>x[y][z]</code> returns the
+          'z'th element of the 'y'th element of x. For our purposes, this can more appropriately
+        be read as an address like: matrix  x, row y, column z.</p>
+        <br>
+        <p>&emsp;The code is otherwise pretty straightforward. For every row in the first
+          matrix, we will go through every column in the second, but for every column in the second
+          we get to something interesting. The numbers being multiplied no matter from what row in
+          matrixA or column in matrixB must be in the same column of matrixA as row in matrixB. Since
+          I have lazily coded this example to take the number of columns from matrixA as the value for
+          'k' in the code above, you can see what happens when the matrices are not compatible.</p>
+      </div>
+  </div> <!-- end of container -->
 
 <script>
 
@@ -226,8 +251,8 @@ console.log(mat0body.rows[0].cells[0]);
     document.getElementById('matCbody').rows[i_step].cells[j_step].className = 'highlight_b';
     k_last > k ? k_last = k-1 : k_last = k_step;
     k_step++;
-    cellAIK = document.getElementById('mat0body').rows[i_step].cells[(k_step)-1].innerHTML.substring(1,2);
-    cellBKJ = document.getElementById('mat1body').rows[(k_step)-1].cells[j_step].innerHTML.substring(1,2);
+    cellAIK = document.getElementById('mat0body').rows[i_step].cells[(k_step)-1].innerHTML;
+    cellBKJ = document.getElementById('mat1body').rows[(k_step)-1].cells[j_step].innerHTML;
     if (k_step >1 && k_step < col+1){
       axb += '+'
     }
