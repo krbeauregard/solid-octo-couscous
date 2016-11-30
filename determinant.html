@@ -92,11 +92,52 @@ operations operations to calculate the determinant; we're not doing that by hand
 A 20x20 matrix would take around \(10^{18}\) operations; this would take a really
 long time even on a modern computer. We need a better way.
 </p>
+<h2>LU Decomposition to the Rescue!!!</h2>
+<p>An interesting theorem of linear algebra states that any square matrix can
+be decomposed into a lower triangular matrix \(L\) and an upper triangular matrix
+\(U\) such that \(A = LU\). For example:
+$$
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{bmatrix}
+=
+\begin{bmatrix}
+l_{11} & 0 & 0 \\
+l_{21} & l_{22} & 0\\
+l_{31} & l_{32} & j_{33}
+\end{bmatrix}
+\begin{bmatrix}
+u_{11} & u_{12} & u_{13} \\
+0      & u_{22} & u_{23} \\
+0      & 0      & u_{33}\\
+\end{bmatrix}
+$$
+<p>
+This LU decomposition is handy because the determinant of a triangular matrix 
+is the product of it's diagonal entries. Once we have \(L\) and \(U\) instead
+calculated \(n!\) determinants we can just do \(n\) multiplications. This reduces
+our time complexity from \(O(n!)\) to \(O(n^3)\). The fascinating consequence
+of this theorem is that we can now take a problem that was intractable, like
+calculating the determinant of a 100x100 matrix, into something tractable.
+</p>
+<p>
+Another interesting consequence of having the LU decomposition is that we can
+can solve as many systems of linear equations \(A \cdot x = b\) as we want.<sub><a href="ref2">[2]</a></sub>
+And being able to solve systems of linear equations allows us to calculate the
+<a href="inverse.html">inverse</a> of a matrix. So LU turn out to be a really
+big hammer.
+</p>
 
 <h4 class="top-buffer">References</h4>
 <span id="ref1">
 Schneider, H. Barker, G.P. <em>Matrices and Linear Algebra</em>. New York. Dover Publishing. Chapter 4.
 </span>
+<br>
+<span id="ref2">
+Press, W. H. (1988). Numerical recipes in C: The art of scientific computing. Cambridge:
+<br>&nbsp;Cambridge University Press
 </body>
 <script src="mat.js"></script>
 <script src="ludcmp.js"></script>
