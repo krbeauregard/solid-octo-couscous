@@ -2,6 +2,10 @@ body {
     padding: 70px 0 0 0;
 }
 
+.top-buffer {
+    margin-top:40px;
+}
+
 .highlight_y {
     background-color:#e9c904;
 }

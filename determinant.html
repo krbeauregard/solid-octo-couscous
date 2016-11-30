@@ -64,7 +64,34 @@
     <button id="determinant_btn" class="btn" type="button">Determinant</button>
 
 </div>
+<!----------------------Begin Mathiness -->
+<h2>The definition of a determinant...</h2>
+<!--$$det A = \sum \{(sign \pi)a_{1, \pi(1)}...a_{n, \pi(n)\}: \pi \elem S(n)$$-->
+$$det A = \sum\{(\text{sign} \pi)a_{1\pi(1)} \ldots a_{n\pi(n)}: \pi \in S(n) \} $$<sub><a href="#ref1">[1]</a></sub>
+<h2>What the heck does that mean?</h2>
+<p>
+\(S(n)\) is the set of all permutations of \(1 \ldots n\) and the sign of a
+a permutation is +1 if there is an even number of elements and -1 if there
+is odd number of elements (it's not too important for the time complexity, but
+this is where we get that checkerboard pattern of + and - when doing row expansion).
+For example when \(n = 2 \quad S(n) = \{(1,2), (2,1)\}\) and since there is an even
+number of elements the sign is +1. This is scary to a computer scientist,
+because we know that the number of permutations of a set of \(n\) things is \(n!\).
+As we saw in class computing the determinant for a 2x2 matrix is fairly easy; we
+only need 2 multiplications and one subtraction \(a_{11}a_{22} - a_{12}a_{21}\).
+We expected that many operations because we already showed the \(S(2) = 2! = 2\).
+</p>
+<p>
+Factorials grow very fast. For a 10x10 matrix it would take about 3 and a half million
+operations operations to calculate the determinant; we're not doing that by hand.
+A 20x20 matrix would take around \(10^{18}\) operations; this would take a really
+long time even on a modern computer. We need a better way.
+</p>
 
+<h4 class="top-buffer">References</h4>
+<span id="ref1">
+Schneider, H. Barker, G.P. <em>Matrices and Linear Algebra</em>. New York. Dover Publishing. Chapter 4.
+</span>
 </body>
 <script src="mat.js"></script>
 <script src="ludcmp.js"></script>
@@ -96,6 +123,9 @@ determinant_button.addEventListener('click', function(e) {
   //det.tobrowser("determinant", "determinant");
 
 }, false);
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 <!-- End Body -->
 </html>
