@@ -115,7 +115,7 @@ u_{11} & u_{12} & u_{13} \\
 \end{bmatrix}
 $$
 <p>
-This LU decomposition is handy because the determinant of a triangular matrix 
+This LU decomposition is handy because the determinant of a triangular matrix
 is the product of it's diagonal entries. Once we have \(L\) and \(U\) instead
 calculated \(n!\) determinants we can just do \(n\) multiplications. This reduces
 our time complexity from \(O(n!)\) to \(O(n^3)\). The fascinating consequence
@@ -126,7 +126,7 @@ calculating the determinant of a 100x100 matrix, into something tractable.
 Another interesting consequence of having the LU decomposition is that we can
 can solve as many systems of linear equations \(A \cdot x = b\) as we want.<sub><a href="ref2">[2]</a></sub>
 And being able to solve systems of linear equations allows us to calculate the
-<a href="inverse.html">inverse</a> of a matrix. So LU turn out to be a really
+<a href="inverse.html">inverse</a> of a matrix. So LU turns out to be a really
 big hammer.
 </p>
 
