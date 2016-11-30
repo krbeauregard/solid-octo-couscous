@@ -58,12 +58,69 @@
 				<span class="input-group-addon">
 					<button id="generate_btn" class="btn" type="button" aria-label="input for m">Generate</button>
 				</span>
-      <button id="rref_btn" class="btn" type="button">RREF</button>
 			</div><!-- end the input group -->
     </div><!-- end col-md-4 -->
 
     <div id="rref"></div><!-- end inverse matrix -->
+    <button id="rref_btn" class="btn" type="button">RREF</button>
+    </div>
+<div>
+  <pre>
+    <code class='language-javascript'>
+      <p>newmat = this.copy();
+      var A = newmat.data;
+      var rows = A.length;
+      var columns = A[0].length;
 
+      var pivot = 0;
+      for (var k = 0; k < rows; k++) {
+          if (columns <= pivot){ return; }  //no point continuing if no columns
+
+          var i = k;
+          while (A[i][pivot] === 0) { //looking for leading non-zero in row for pivot
+              i++;
+              if (rows === i) {
+                  i = k;
+                  pivot++;
+                  if (columns === pivot) {
+                  }
+              }
+          }
+          var irow = A[i], krow = A[k]; //swap row without leading zero up
+          A[i] = krow, A[k] = irow;
+
+          var val = A[k][pivot];
+
+          if (typeof val === 'undefined') { //don't divide by 0, swap rows
+              var tmp = A[k];
+              A[k] = A[k+1];
+              A[k+1] = tmp;
+              console.log("cant' divide by zero");
+              return this.rref();
+          }
+          for (var j = 0; j < columns; j++) { A[k][j] /= val; } //scale row so pivot = 1
+          for (var i = 0; i < rows; i++) {
+              if (i === k) continue;
+              val = A[i][pivot];
+              for (var j = 0; j < columns; j++) { //subtract scaled row from others
+                  A[i][j] -= val * A[k][j];       //so other entries in column = 0
+                  if (isNaN(A[i][j])) {
+                  }
+              }
+          }
+          pivot++;
+        }
+      return newmat;
+      }
+    }
+</p>
+</code>
+</div>
+<div style='padding:50px'>&emsp;The differences between the JavaScript here and
+  the Python on the matrix multiplication page are insignificant. The major points
+  are shown in the comments (any text on a line following two slashes '//' is
+  ignored by the computer.) From this we obviously have a function to solve a system
+  of equations as well.
 </div>
 
 </body>
@@ -72,6 +129,8 @@
 <script>
 generate_button = document.getElementById("generate_btn");
 generate_button.addEventListener('click', function(e) {
+  var rref_div = document.getElementById('rref');
+  rref_div.innerHTML = '';
   var arow = document.getElementById('rowsA').value;
   var acol = document.getElementById('colsA').value;
   console.log("e: " + e);

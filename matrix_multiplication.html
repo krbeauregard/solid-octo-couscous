@@ -166,6 +166,14 @@ var multiply_button = document.getElementById("multiply_button");
 
 
 create_matrix_button.addEventListener("click", function(e) {
+  document.getElementById('matC').innerHTML = '';
+  i_step = -1;
+  j_step = -1;
+  k_step = 0;
+  i_last = 0;
+  j_last = 0;
+  k_last = 0;
+
   var arow = document.getElementById('rowsA').value;
   var acol = document.getElementById('colsA').value;
   var brow = document.getElementById('rowsB').value;
