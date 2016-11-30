@@ -54,7 +54,8 @@
     in the days of the command-line interface, users ... had to convert their
     thoughts into alphanumeric symbols and type them in, a grindingly tedious
     process that stripped away all ambiguity, laid bare all hidden assumptions,
-    and cruelly punished laziness and imprecision."</p>
+    and cruelly punished laziness and imprecision." This is what programmers do
+    as well.</p>
     <p>&emsp;This gets us to the matter of learning. It is rare to teach something
     without learning in the process. This is just as true whether teaching computers
     or people. The process Stephenson wrote about, removing ambiguity and implicit
@@ -67,8 +68,13 @@
     <p>&emsp;The other lesson learned in looking at the algorithms in linear algebra
     came from a bit of human intuition. As conceived, this project was going to
     implement algorithms as learned in class... until we got to the determinant portion.
-    // $$O(n!)$$ something something... Laplace Expansion = O(n!), LUD = O(n^3)//
-  </p>
+    We realized that Laplace Expansion effectively carries a computational complexity
+    of \(O(n!)\) while LU decomposition requires \(O(n^3)\). Simply, a 10 x 10
+    matrix could require approximately 3628800 operations or 1000. That combined with
+    the fact that LUD can also be used to calculate the inverse of a matrix, among
+    other things, it is pretty clear that the LUD algorithm will save both the computer
+    and programmer a significant amount of work.</p>
+    
 </div>
 
 </body>
