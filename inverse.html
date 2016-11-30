@@ -72,16 +72,26 @@
       <button id="inverse_btn" class="btn" type="button">Inverse</button>
 
   </div><!-- end row -->
-
-
-
-  <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <p>
+  Now that we have the LU decomposition of a matrix finding the matrix
+  inverse is a piece of cake. We learned in class that we can find the 
+  inverse of a matrix by solving a system that looks like this.
   </p>
+$$
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & 1 & 0 & 0 \\
+a_{21} & a_{22} & a_{23} & 0 & 1 & 0 \\
+a_{31} & a_{32} & a_{33} & 0 & 0 & 1
+\end{bmatrix}
+$$
+<p>
+So that's exactly what we told the computer to do. Using the solve methods
+from the LU decomposition which uses forward and backward substitution on the
+\(L\) and \(U\) matrixes we the code sets up a system with the appropriate
+identity matrix and then solves the system. Once again LU decomposition has 
+come in handy.
+</p>
+
 </div>
 
 </body>
